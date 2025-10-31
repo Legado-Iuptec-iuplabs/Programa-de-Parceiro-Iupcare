@@ -1,248 +1,312 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Programa de Parceiros IupCare</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --pink: #FF6B9D; --purple: #9D6CFF; --light-pink: #FFF0F5;
-            --light-purple: #F5F0FF; --gradient: linear-gradient(135deg, #FF6B9D 0%, #9D6CFF 100%);
-            --text-dark: #2D3748; --text-light: #718096; --success: #48BB78; --white: #FFFFFF;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: var(--text-dark); line-height: 1.6;
-            background: linear-gradient(180deg, var(--light-pink) 0%, var(--white) 50%, var(--light-purple) 100%);
-        }
-        .hero {
-            background: var(--gradient); color: white; padding: 80px 20px 120px;
-            text-align: center; position: relative; overflow: hidden;
-        }
-        .hero::before {
-            content: ''; position: absolute; width: 600px; height: 600px;
-            background: rgba(255, 255, 255, 0.1); border-radius: 50%; top: -300px; right: -200px;
-        }
-        .hero-content { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; }
-        .hero h1 { font-size: 3.5em; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
-        .hero .subtitle { font-size: 1.5em; margin-bottom: 40px; opacity: 0.95; font-weight: 300; }
-        .hero-stats {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px; margin-top: 60px; max-width: 900px; margin-left: auto; margin-right: auto;
-        }
-        .stat-card {
-            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);
-            padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .stat-number { font-size: 3em; font-weight: bold; margin-bottom: 5px; display: block; }
-        .stat-label { font-size: 1em; opacity: 0.9; }
-        .cta-primary {
-            display: inline-block; background: white; color: var(--pink); padding: 20px 50px;
-            border: none; border-radius: 50px; font-size: 1.3em; font-weight: bold; cursor: pointer;
-            transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-decoration: none; margin-top: 20px;
-        }
-        .cta-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
-        .container {
-            max-width: 1200px; margin: -80px auto 80px; padding: 0 20px; position: relative; z-index: 10;
-        }
-        .section { margin-bottom: 80px; }
-        .section-title {
-            text-align: center; font-size: 2.5em; font-weight: 800; background: var(--gradient);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; margin-bottom: 20px;
-        }
-        .section-subtitle {
-            text-align: center; font-size: 1.2em; color: var(--text-light); margin-bottom: 50px;
-            max-width: 700px; margin-left: auto; margin-right: auto;
-        }
-        .simulator-section {
-            background: white; padding: 60px; border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1); margin-bottom: 60px;
-        }
-        .simulator-table-wrapper { overflow-x: auto; margin-bottom: 40px; }
-        .simulator-table {
-            width: 100%; border-collapse: separate; border-spacing: 0;
-            border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .simulator-table thead tr { background: var(--gradient); color: white; }
-        .simulator-table th {
-            padding: 25px 20px; font-size: 1.3em; font-weight: 800; text-align: center;
-        }
-        .simulator-table th.input-col { text-align: left; width: 35%; }
-        .simulator-table tbody tr:hover { background: rgba(255, 107, 157, 0.05); }
-        .label-cell {
-            padding: 25px 20px; background: var(--light-pink);
-            border-right: 3px solid white; vertical-align: middle;
-        }
-        .label-cell strong {
-            display: block; font-size: 1.1em; color: var(--text-dark); margin-bottom: 10px;
-        }
-        .label-cell small { display: block; color: var(--text-light); font-size: 0.85em; margin-top: 5px; }
-        .input-field {
-            width: 100%; padding: 12px 15px; border: 2px solid var(--pink); border-radius: 10px;
-            font-size: 1em; font-weight: 600; background: white; color: var(--text-dark);
-            margin-top: 8px; transition: all 0.3s;
-        }
-        .input-field:focus {
-            outline: none; box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2); border-color: var(--purple);
-        }
-        .input-field.small { width: 80px; display: inline-block; margin-right: 5px; }
-        .input-field.tiny {
-            width: 60px; display: inline-block; margin-right: 5px; padding: 8px 10px; font-size: 0.95em;
-        }
-        .commission-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-        .commission-inputs div { display: flex; align-items: center; gap: 5px; }
-        .commission-inputs span { font-size: 0.9em; color: var(--text-light); white-space: nowrap; }
-        .result-cell {
-            padding: 25px 20px; text-align: center; vertical-align: middle; border-left: 1px solid rgba(0,0,0,0.05);
-        }
-        .bronze-bg { background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%); }
-        .prata-bg { background: linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(128, 128, 128, 0.15) 100%); }
-        .ouro-bg { background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%); }
-        .result-value { display: block; font-size: 1.3em; font-weight: 700; color: var(--text-dark); }
-        .result-value.large {
-            font-size: 1.8em; font-weight: 800; background: var(--gradient);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .result-value.money { color: var(--success); font-weight: 800; }
-        .result-value.money.large { font-size: 2em; }
-        .highlight-row { background: rgba(255, 107, 157, 0.05); }
-        .highlight-row .result-cell { border-top: 2px solid var(--pink); border-bottom: 2px solid var(--pink); }
-        .divider-row { background: var(--gradient); }
-        .divider-cell { padding: 20px; }
-        .divider-content {
-            display: flex; align-items: center; justify-content: center; gap: 20px; color: white;
-        }
-        .divider-icon { font-size: 2em; }
-        .divider-text { font-size: 1.3em; font-weight: 800; letter-spacing: 2px; }
-        .final-row { background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-purple) 100%); }
-        .final-row .result-cell { border-bottom: 4px solid var(--purple); }
-        .highlight-result { position: relative; }
-        .highlight-result::before {
-            content: '⭐'; position: absolute; top: 10px; right: 10px; font-size: 1.5em;
-        }
-        .simulator-cta {
-            background: var(--light-pink); padding: 40px; border-radius: 20px; text-align: center;
-        }
-        .cta-text { font-size: 1.2em; color: var(--text-dark); margin-bottom: 25px; line-height: 1.8; }
-        .highlight-value {
-            background: var(--gradient); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.2em;
-        }
-        .btn {
-            display: inline-block; padding: 18px 40px; border: none; border-radius: 15px;
-            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s; text-decoration: none;
-        }
-        .btn-gradient { background: var(--gradient); color: white; }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3); }
-        .btn-large { font-size: 1.4em; padding: 20px 60px; }
-        footer {
-            background: white; padding: 60px 40px; border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; margin-top: 80px;
-        }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2em; }
-            .hero .subtitle { font-size: 1.2em; }
-            .simulator-section { padding: 40px 20px; }
-            .simulator-table { font-size: 0.85em; }
-            .simulator-table th, .simulator-table td { padding: 15px 10px; }
-            .input-field.tiny { width: 50px; padding: 6px 8px; font-size: 0.9em; }
-            .result-value { font-size: 1.1em; }
-            .result-value.large { font-size: 1.4em; }
-            .result-value.money.large { font-size: 1.6em; }
-            .btn-large { font-size: 1.2em; padding: 18px 40px; }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Programa de Parceiros IupCare</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --pink: #FF6B9D; --purple: #9D6CFF; --light-pink: #FFF0F5;
+            --light-purple: #F5F0FF; --gradient: linear-gradient(135deg, #FF6B9D 0%, #9D6CFF 100%);
+            --text-dark: #2D3748; --text-light: #718096; --success: #48BB78; --white: #FFFFFF;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark); line-height: 1.6;
+            background: linear-gradient(180deg, var(--light-pink) 0%, var(--white) 50%, var(--light-purple) 100%);
+        }
+        .hero {
+            background: var(--gradient); color: white; padding: 80px 20px 120px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; width: 600px; height: 600px;
+            background: rgba(255, 255, 255, 0.1); border-radius: 50%; top: -300px; right: -200px;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; }
+        .hero h1 { font-size: 3.5em; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero .subtitle { font-size: 1.5em; margin-bottom: 40px; opacity: 0.95; font-weight: 300; }
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px; margin-top: 60px; max-width: 900px; margin-left: auto; margin-right: auto;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);
+            padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .stat-number { font-size: 3em; font-weight: bold; margin-bottom: 5px; display: block; }
+        .stat-label { font-size: 1em; opacity: 0.9; }
+        .cta-primary {
+            display: inline-block; background: white; color: var(--pink); padding: 20px 50px;
+            border: none; border-radius: 50px; font-size: 1.3em; font-weight: bold; cursor: pointer;
+            transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-decoration: none; margin-top: 20px;
+        }
+        .cta-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .container {
+            max-width: 1200px; margin: -80px auto 80px; padding: 0 20px; position: relative; z-index: 10;
+        }
+        .section { margin-bottom: 80px; }
+        .section-title {
+            text-align: center; font-size: 2.5em; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 20px;
+        }
+        .section-subtitle {
+            text-align: center; font-size: 1.2em; color: var(--text-light); margin-bottom: 50px;
+            max-width: 700px; margin-left: auto; margin-right: auto;
+        }
+        .simulator-section {
+            background: white; padding: 60px; border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); margin-bottom: 60px;
+        }
+        .simulator-table-wrapper { overflow-x: auto; margin-bottom: 40px; }
+        .simulator-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .simulator-table thead tr { background: var(--gradient); color: white; }
+        .simulator-table th {
+            padding: 25px 20px; font-size: 1.3em; font-weight: 800; text-align: center;
+        }
+        .simulator-table th.input-col { text-align: left; width: 35%; }
+        .simulator-table tbody tr:hover { background: rgba(255, 107, 157, 0.05); }
+        .label-cell {
+            padding: 25px 20px; background: var(--light-pink);
+            border-right: 3px solid white; vertical-align: middle;
+        }
+        .label-cell strong {
+            display: block; font-size: 1.1em; color: var(--text-dark); margin-bottom: 10px;
+        }
+        .label-cell small { display: block; color: var(--text-light); font-size: 0.85em; margin-top: 5px; }
+        .input-field {
+            width: 100%; padding: 12px 15px; border: 2px solid var(--pink); border-radius: 10px;
+            font-size: 1em; font-weight: 600; background: white; color: var(--text-dark);
+            margin-top: 8px; transition: all 0.3s;
+        }
+        .input-field:focus {
+            outline: none; box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2); border-color: var(--purple);
+        }
+        .input-field.small { width: 80px; display: inline-block; margin-right: 5px; }
+        .input-field.tiny {
+            width: 60px; display: inline-block; margin-right: 5px; padding: 8px 10px; font-size: 0.95em;
+        }
+        .commission-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .commission-inputs div { display: flex; align-items: center; gap: 5px; }
+        .commission-inputs span { font-size: 0.9em; color: var(--text-light); white-space: nowrap; }
+        .result-cell {
+            padding: 25px 20px; text-align: center; vertical-align: middle; border-left: 1px solid rgba(0,0,0,0.05);
+        }
+        .bronze-bg { background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%); }
+        .prata-bg { background: linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(128, 128, 128, 0.15) 100%); }
+        .ouro-bg { background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%); }
+        .result-value { display: block; font-size: 1.3em; font-weight: 700; color: var(--text-dark); }
+        .result-value.large {
+            font-size: 1.8em; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .result-value.money { color: var(--success); font-weight: 800; }
+        .result-value.money.large { font-size: 2em; }
+        .highlight-row { background: rgba(255, 107, 157, 0.05); }
+        .highlight-row .result-cell { border-top: 2px solid var(--pink); border-bottom: 2px solid var(--pink); }
+        .divider-row { background: var(--gradient); }
+        .divider-cell { padding: 20px; }
+        .divider-content {
+            display: flex; align-items: center; justify-content: center; gap: 20px; color: white;
+        }
+        .divider-icon { font-size: 2em; }
+        .divider-text { font-size: 1.3em; font-weight: 800; letter-spacing: 2px; }
+        .final-row { background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-purple) 100%); }
+        .final-row .result-cell { border-bottom: 4px solid var(--purple); }
+        .highlight-result { position: relative; }
+        .highlight-result::before {
+            content: '⭐'; position: absolute; top: 10px; right: 10px; font-size: 1.5em;
+        }
+        .simulator-cta {
+            background: var(--light-pink); padding: 40px; border-radius: 20px; text-align: center;
+        }
+        .cta-text { font-size: 1.2em; color: var(--text-dark); margin-bottom: 25px; line-height: 1.8; }
+        .highlight-value {
+            background: var(--gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.2em;
+        }
+        .btn {
+            display: inline-block; padding: 18px 40px; border: none; border-radius: 15px;
+            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s; text-decoration: none;
+        }
+        .btn-gradient { background: var(--gradient); color: white; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3); }
+        .btn-large { font-size: 1.4em; padding: 20px 60px; }
+        footer {
+            background: white; padding: 60px 40px; border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; margin-top: 80px;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2em; }
+            .hero .subtitle { font-size: 1.2em; }
+            .simulator-section { padding: 40px 20px; }
+            .simulator-table { font-size: 0.85em; }
+            .simulator-table th, .simulator-table td { padding: 15px 10px; }
+            .input-field.tiny { width: 50px; padding: 6px 8px; font-size: 0.9em; }
+            .result-value { font-size: 1.1em; }
+            .result-value.large { font-size: 1.4em; }
+            .result-value.money.large { font-size: 1.6em; }
+            .btn-large { font-size: 1.2em; padding: 18px 40px; }
+        }
+    </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🩺 Programa de Parceiros IupCare</h1>
-            <p class="subtitle">Transforme clínicas em histórias de sucesso. Construa renda recorrente ajudando profissionais de saúde.</p>
-            <a href="#simulador" class="cta-primary">Simular Meus Ganhos</a>
-            <div class="hero-stats">
-                <div class="stat-card"><span class="stat-number">10-30%</span><span class="stat-label">Comissão Recorrente</span></div>
-                <div class="stat-card"><span class="stat-number">2.500+</span><span class="stat-label">Clínicas no Brasil</span></div>
-                <div class="stat-card"><span class="stat-number">R$ 197</span><span class="stat-label">Ticket Médio</span></div>
-            </div>
-        </div>
-    </section>
-    <div class="container">
-        <section id="simulador" class="simulator-section">
-            <h2 class="section-title">💰 Simulador de Ganhos</h2>
-            <p class="section-subtitle">Ajuste os valores à esquerda e veja automaticamente seus ganhos em Bronze, Prata e Ouro</p>
-            <div class="simulator-table-wrapper">
-                <table class="simulator-table">
-                    <thead><tr><th class="input-col">Seus Dados</th><th>🥉 Bronze</th><th>🥈 Prata</th><th>🥇 Ouro</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td class="label-cell"><strong>Qtde Clínicas/Consultórios</strong><input type="number" id="qtde-clinicas" class="input-field" value="50" min="1" max="500"></td>
-                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-clinicas">50</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value" id="prata-clinicas">100</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-clinicas">200</span></td>
-                        </tr>
-                        <tr>
-                            <td class="label-cell"><strong>Profissionais de Saúde por Clínica</strong><input type="number" id="qtde-profissionais" class="input-field" value="5" min="1" max="50"></td>
-                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-profissionais">5</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value" id="prata-profissionais">5</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-profissionais">5</span></td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td class="label-cell"><strong>Clientes Finais Totais</strong><small>(Clínicas × Profissionais)</small></td>
-                            <td class="result-cell bronze-bg"><span class="result-value large" id="bronze-total-clientes">250</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value large" id="prata-total-clientes">500</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-total-clientes">1000</span></td>
-                        </tr>
-                        <tr>
-                            <td class="label-cell"><strong>Ticket Médio Cliente Final</strong><select id="ticket-medio" class="input-field"><option value="97">R$ 97,00 - Básico</option><option value="197" selected>R$ 197,00 - Premium</option><option value="397">R$ 397,00 - Avançado</option></select></td>
-                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-ticket">R$ 197,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value" id="prata-ticket">R$ 197,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-ticket">R$ 197,00</span></td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td class="label-cell"><strong>Faturamento Total Mensal</strong><small>(Clientes × Ticket)</small></td>
-                            <td class="result-cell bronze-bg"><span class="result-value large" id="bronze-faturamento">R$ 49.250,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value large" id="prata-faturamento">R$ 98.500,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-faturamento">R$ 197.000,00</span></td>
-                        </tr>
-                        <tr class="divider-row"><td colspan="4" class="divider-cell"><div class="divider-content"><span class="divider-icon">💰</span><span class="divider-text">SUAS COMISSÕES MENSAIS</span><span class="divider-icon">💰</span></div></td></tr>
-                        <tr>
-                            <td class="label-cell"><strong>Indicador</strong><input type="number" id="comissao-indicador" class="input-field small" value="10" min="0" max="100" step="1"><span>%</span></td>
-                            <td class="result-cell bronze-bg"><span class="result-value money" id="bronze-indicador">R$ 4.925,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value money" id="prata-indicador">R$ 0,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value money" id="ouro-indicador">R$ 0,00</span></td>
-                        </tr>
-                        <tr>
-                            <td class="label-cell"><strong>Revendedor / Sales</strong><div class="commission-inputs"><div><input type="number" id="comissao-sales-bronze" class="input-field tiny" value="12" min="0" max="100" step="1"><span>% Bronze</span></div><div><input type="number" id="comissao-sales-prata" class="input-field tiny" value="15" min="0" max="100" step="1"><span>% Prata</span></div><div><input type="number" id="comissao-sales-ouro" class="input-field tiny" value="20" min="0" max="100" step="1"><span>% Ouro</span></div></div></td>
-                            <td class="result-cell bronze-bg"><span class="result-value money" id="bronze-sales">R$ 5.910,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value money" id="prata-sales">R$ 14.775,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value money" id="ouro-sales">R$ 39.400,00</span></td>
-                        </tr>
-                        <tr class="final-row">
-                            <td class="label-cell"><strong>VAR (Value-Added Reseller)</strong><div class="commission-inputs"><div><input type="number" id="comissao-var-bronze" class="input-field tiny" value="22" min="0" max="100" step="1"><span>% Bronze</span></div><div><input type="number" id="comissao-var-prata" class="input-field tiny" value="25" min="0" max="100" step="1"><span>% Prata</span></div><div><input type="number" id="comissao-var-ouro" class="input-field tiny" value="30" min="0" max="100" step="1"><span>% Ouro</span></div></div></td>
-                            <td class="result-cell bronze-bg highlight-result"><span class="result-value money large" id="bronze-var">R$ 10.835,00</span></td>
-                            <td class="result-cell prata-bg highlight-result"><span class="result-value money large" id="prata-var">R$ 24.625,00</span></td>
-                            <td class="result-cell ouro-bg highlight-result"><span class="result-value money large" id="ouro-var">R$ 59.100,00</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="simulator-cta">
-                <p class="cta-text">💡 <strong>Exemplo:</strong> Como VAR Ouro com 200 clínicas, você ganharia <strong class="highlight-value" id="example-value">R$ 59.100/mês</strong> = <strong class="highlight-value" id="example-year">R$ 709.200/ano</strong></p>
-                <button class="btn btn-gradient btn-large" onclick="alert('🎉 Em produção, isso abriria o formulário de cadastro!')">🚀 Quero Começar Agora!</button>
-            </div>
-        </section>
-    </div>
-    <footer>
-        <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>IupTec Tecnologia e Desenvolvimento de Sistemas Ltda</strong></p>
-        <p style="color: var(--text-light);">Av. Bélgica, 1220, sala 11 - Uberlândia/MG - CEP: 38.405-030<br>CNPJ: 34.001.576/0001-95</p>
-        <p style="margin-top: 20px;">📧 parcerias@iupcare.com.br | 📱 (34) 99999-9999</p>
-        <p style="margin-top: 30px; color: var(--text-light); font-size: 0.9em;">© 2025 IupCare</p>
-    </footer>
-    <script>
-        const m={bronze:{clinicas:50},prata:{clinicas:100},ouro:{clinicas:200}};function c(){const a=parseInt(document.getElementById('qtde-clinicas').value)||50,b=parseInt(document.getElementById('qtde-profissionais').value)||5,d=parseFloat(document.getElementById('ticket-medio').value)||197,e=parseFloat(document.getElementById('comissao-indicador').value)||10,f=parseFloat(document.getElementById('comissao-sales-bronze').value)||12,g=parseFloat(document.getElementById('comissao-sales-prata').value)||15,h=parseFloat(document.getElementById('comissao-sales-ouro').value)||20,i=parseFloat(document.getElementById('comissao-var-bronze').value)||22,j=parseFloat(document.getElementById('comissao-var-prata').value)||25,k=parseFloat(document.getElementById('comissao-var-ouro').value)||30;n('bronze',m.bronze.clinicas,b,d,e,f,i);n('prata',m.prata.clinicas,b,d,0,g,j);n('ouro',m.ouro.clinicas,b,d,0,h,k);u()}function n(a,b,d,e,f,g,h){const i=b*d,j=i*e,k=j*(f/100),l=j*(g/100),m=j*(h/100);document.getElementById(a+'-clinicas').textContent=b;document.getElementById(a+'-profissionais').textContent=d;document.getElementById(a+'-total-clientes').textContent=i;document.getElementById(a+'-ticket').textContent=p(e);document.getElementById(a+'-faturamento').textContent=p(j);document.getElementById(a+'-indicador').textContent=p(k);document.getElementById(a+'-sales').textContent=p(l);document.getElementById(a+'-var').textContent=p(m)}function u(){const a=document.getElementById('ouro-var').textContent,b=parseFloat(a.replace('R$','').replace(/\./g,'').replace(',','.'))||0,c=b*12;document.getElementById('example-value').textContent=p(b);document.getElementById('example-year').textContent=p(c)}function p(a){return'R$ '+a.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}document.getElementById('qtde-clinicas').addEventListener('input',c);document.getElementById('qtde-profissionais').addEventListener('input',c);document.getElementById('ticket-medio').addEventListener('change',c);document.getElementById('comissao-indicador').addEventListener('input',c);document.getElementById('comissao-sales-bronze').addEventListener('input',c);document.getElementById('comissao-sales-prata').addEventListener('input',c);document.getElementById('comissao-sales-ouro').addEventListener('input',c);document.getElementById('comissao-var-bronze').addEventListener('input',c);document.getElementById('comissao-var-prata').addEventListener('input',c);document.getElementById('comissao-var-ouro').addEventListener('input',c);c();document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(a){a.preventDefault();const b=document.querySelector(this.getAttribute('href'));b&&b.scrollIntoView({behavior:'smooth',block:'start'})})});
-    </script>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🩺 Programa de Parceiros IupCare</h1>
+            <p class="subtitle">Transforme clínicas em histórias de sucesso. Construa renda recorrente ajudando profissionais de saúde.</p>
+            <a href="#simulador" class="cta-primary">Simular Meus Ganhos</a>
+            <div class="hero-stats">
+                <div class="stat-card"><span class="stat-number">10-30%</span><span class="stat-label">Comissão Recorrente</span></div>
+                <div class="stat-card"><span class="stat-number">2.500+</span><span class="stat-label">Clínicas no Brasil</span></div>
+                <div class="stat-card"><span class="stat-number">R$ 197</span><span class="stat-label">Ticket Médio</span></div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <section id="simulador" class="simulator-section">
+            <h2 class="section-title">💰 Simulador de Ganhos</h2>
+            <p class="section-subtitle">Ajuste os valores à esquerda e veja automaticamente seus ganhos em Bronze, Prata e Ouro</p>
+            <div class="simulator-table-wrapper">
+                <table class="simulator-table">
+                    <thead><tr><th class="input-col">Seus Dados</th><th>🥉 Bronze</th><th>🥈 Prata</th><th>🥇 Ouro</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="label-cell"><strong>Qtde Clínicas/Consultórios</strong><input type="number" id="qtde-clinicas" class="input-field" value="50" min="1" max="500"></td>
+                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-clinicas">50</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value" id="prata-clinicas">100</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-clinicas">200</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell"><strong>Profissionais de Saúde por Clínica</strong><input type="number" id="qtde-profissionais" class="input-field" value="5" min="1" max="50"></td>
+                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-profissionais">5</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value" id="prata-profissionais">5</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-profissionais">5</span></td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="label-cell"><strong>Clientes Finais Totais</strong><small>(Clínicas × Profissionais)</small></td>
+                            <td class="result-cell bronze-bg"><span class="result-value large" id="bronze-total-clientes">250</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value large" id="prata-total-clientes">500</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-total-clientes">1000</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell"><strong>Ticket Médio Cliente Final</strong><select id="ticket-medio" class="input-field"><option value="97">R$ 97,00 - Básico</option><option value="197" selected>R$ 197,00 - Premium</option><option value="397">R$ 397,00 - Avançado</option></select></td>
+                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-ticket">R$ 197,00</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value" id="prata-ticket">R$ 197,00</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-ticket">R$ 197,00</span></td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="label-cell"><strong>Faturamento Total Mensal</strong><small>(Clientes × Ticket)</small></td>
+                            <td class="result-cell bronze-bg"><span class="result-value large" id="bronze-faturamento">R$ 49.250,00</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value large" id="prata-faturamento">R$ 98.500,00</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-faturamento">R$ 197.000,00</span></td>
+                        </tr>
+                        <tr class="divider-row"><td colspan="4" class="divider-cell"><div class="divider-content"><span class="divider-icon">💰</span><span class="divider-text">SUAS COMISSÕES MENSAIS</span><span class="divider-icon">💰</span></div></td></tr>
+                        <tr>
+                            <td class="label-cell"><strong>Indicador</strong><input type="number" id="comissao-indicador" class="input-field small" value="10" min="0" max="100" step="1"><span>%</span></td>
+                            <td class="result-cell bronze-bg"><span class="result-value money" id="bronze-indicador">R$ 4.925,00</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value money" id="prata-indicador">R$ 0,00</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value money" id="ouro-indicador">R$ 0,00</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell"><strong>Revendedor / Sales</strong><div class="commission-inputs"><div><input type="number" id="comissao-sales-bronze" class="input-field tiny" value="12" min="0" max="100" step="1"><span>% Bronze</span></div><div><input type="number" id="comissao-sales-prata" class="input-field tiny" value="15" min="0" max="100" step="1"><span>% Prata</span></div><div><input type="number" id="comissao-sales-ouro" class="input-field tiny" value="20" min="0" max="100" step="1"><span>% Ouro</span></div></div></td>
+                            <td class="result-cell bronze-bg"><span class="result-value money" id="bronze-sales">R$ 5.910,00</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value money" id="prata-sales">R$ 14.775,00</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value money" id="ouro-sales">R$ 39.400,00</span></td>
+                        </tr>
+                        <tr class="final-row">
+                            <td class="label-cell"><strong>VAR (Value-Added Reseller)</strong><div class="commission-inputs"><div><input type="number" id="comissao-var-bronze" class="input-field tiny" value="22" min="0" max="100" step="1"><span>% Bronze</span></div><div><input type="number" id="comissao-var-prata" class="input-field tiny" value="25" min="0" max="100" step="1"><span>% Prata</span></div><div><input type="number" id="comissao-var-ouro" class="input-field tiny" value="30" min="0" max="100" step="1"><span>% Ouro</span></div></div></td>
+                            <td class="result-cell bronze-bg highlight-result"><span class="result-value money large" id="bronze-var">R$ 10.835,00</span></td>
+                            <td class="result-cell prata-bg highlight-result"><span class="result-value money large" id="prata-var">R$ 24.625,00</span></td>
+                            <td class="result-cell ouro-bg highlight-result"><span class="result-value money large" id="ouro-var">R$ 59.100,00</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="simulator-cta">
+                <p class="cta-text">💡 <strong>Exemplo:</strong> Como VAR Ouro com 200 clínicas, você ganharia <strong class="highlight-value" id="example-value">R$ 59.100/mês</strong> = <strong class="highlight-value" id="example-year">R$ 709.200/ano</strong></p>
+                <button class="btn btn-gradient btn-large" onclick="alert('🎉 Em produção, isso abriria o formulário de cadastro!')">🚀 Quero Começar Agora!</button>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>IupTec Tecnologia e Desenvolvimento de Sistemas Ltda</strong></p>
+        <p style="color: var(--text-light);">Av. Bélgica, 1220, sala 11 - Uberlândia/MG - CEP: 38.405-030<br>CNPJ: 34.001.576/0001-95</p>
+        <p style="margin-top: 20px;">📧 parcerias@iupcare.com.br | 📱 (34) 99999-9999</p>
+        <p style="margin-top: 30px; color: var(--text-light); font-size: 0.9em;">© 2025 IupCare</p>
+    </footer>
+    <script>
+        const m={bronze:{clinicas:50},prata:{clinicas:100},ouro:{clinicas:200}};
+        
+        function c(){
+            const a=parseInt(document.getElementById('qtde-clinicas').value)||50,
+            b=parseInt(document.getElementById('qtde-profissionais').value)||5,
+            d=parseFloat(document.getElementById('ticket-medio').value)||197,
+            e=parseFloat(document.getElementById('comissao-indicador').value)||10,
+            f=parseFloat(document.getElementById('comissao-sales-bronze').value)||12,
+            g=parseFloat(document.getElementById('comissao-sales-prata').value)||15,
+            h=parseFloat(document.getElementById('comissao-sales-ouro').value)||20,
+            i=parseFloat(document.getElementById('comissao-var-bronze').value)||22,
+            j=parseFloat(document.getElementById('comissao-var-prata').value)||25,
+            k=parseFloat(document.getElementById('comissao-var-ouro').value)||30;
+            
+            // CHAMADAS CORRIGIDAS: Usa 'a' (Qtde Clínicas digitada) e seus múltiplos
+            n('bronze', a, b, d, e, f, i); 
+            n('prata', a * 2, b, d, 0, g, j); 
+            n('ouro', a * 4, b, d, 0, h, k); 
+            
+            u()
+        }
+        
+        function n(a,b,d,e,f,g,h){
+            const i=b*d,
+                j=i*e,
+                k=j*(f/100),
+                l=j*(g/100),
+                m=j*(h/100);
+            
+            document.getElementById(a+'-clinicas').textContent=b;
+            document.getElementById(a+'-profissionais').textContent=d;
+            document.getElementById(a+'-total-clientes').textContent=i;
+            document.getElementById(a+'-ticket').textContent=p(e);
+            document.getElementById(a+'-faturamento').textContent=p(j);
+            document.getElementById(a+'-indicador').textContent=p(k);
+            document.getElementById(a+'-sales').textContent=p(l);
+            document.getElementById(a+'-var').textContent=p(m)
+        }
+        
+        function u(){
+            const a=document.getElementById('ouro-var').textContent,
+                b=parseFloat(a.replace('R$','').replace(/\./g,'').replace(',','.'))||0,
+                c=b*12;
+            document.getElementById('example-value').textContent=p(b);
+            document.getElementById('example-year').textContent=p(c)
+        }
+        
+        function p(a){
+            return'R$ '+a.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})
+        }
+        
+        document.getElementById('qtde-clinicas').addEventListener('input',c);
+        document.getElementById('qtde-profissionais').addEventListener('input',c);
+        document.getElementById('ticket-medio').addEventListener('change',c);
+        document.getElementById('comissao-indicador').addEventListener('input',c);
+        document.getElementById('comissao-sales-bronze').addEventListener('input',c);
+        document.getElementById('comissao-sales-prata').addEventListener('input',c);
+        document.getElementById('comissao-sales-ouro').addEventListener('input',c);
+        document.getElementById('comissao-var-bronze').addEventListener('input',c);
+        document.getElementById('comissao-var-prata').addEventListener('input',c);
+        document.getElementById('comissao-var-ouro').addEventListener('input',c);
+        
+        c();
+        
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(a){a.preventDefault();const b=document.querySelector(this.getAttribute('href'));b&&b.scrollIntoView({behavior:'smooth',block:'start'})})});
+    </script>
 </body>
 </html>
