@@ -4,19 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Programa de Parceiros IupCare</title>
+    <title>Programa de Parceiros IupCare - Comissões e Revenda</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --pink: #FF6B9D; --purple: #9D6CFF; --light-pink: #FFF0F5;
             --light-purple: #F5F0FF; --gradient: linear-gradient(135deg, #FF6B9D 0%, #9D6CFF 100%);
             --text-dark: #2D3748; --text-light: #718096; --success: #48BB78; --white: #FFFFFF;
+            --warning: #F59E0B;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: var(--text-dark); line-height: 1.6;
-            background: linear-gradient(180deg, var(--light-pink) 0%, var(--white) 50%, var(--light-purple) 100%);
         }
+        
+        /* Header & Navigation */
+        header {
+            position: sticky; top: 0; z-index: 1000; background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s;
+        }
+        header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.15); }
+        nav {
+            max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between;
+            align-items: center; padding: 20px 40px;
+        }
+        .logo { font-size: 1.8em; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-dark); font-weight: 600;
+            padding: 10px 20px; border-radius: 10px; transition: all 0.3s;
+        }
+        .nav-links a:hover { background: var(--light-pink); color: var(--pink); }
+        .nav-links a.active { background: var(--gradient); color: white; }
+        .mobile-toggle { display: none; font-size: 1.8em; cursor: pointer; }
+        
+        /* Hero */
         .hero {
             background: var(--gradient); color: white; padding: 80px 20px 120px;
             text-align: center; position: relative; overflow: hidden;
@@ -38,16 +62,12 @@
         }
         .stat-number { font-size: 3em; font-weight: bold; margin-bottom: 5px; display: block; }
         .stat-label { font-size: 1em; opacity: 0.9; }
-        .cta-primary {
-            display: inline-block; background: white; color: var(--pink); padding: 20px 50px;
-            border: none; border-radius: 50px; font-size: 1.3em; font-weight: bold; cursor: pointer;
-            transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-decoration: none; margin-top: 20px;
-        }
-        .cta-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        
+        /* Container */
         .container {
-            max-width: 1200px; margin: -80px auto 80px; padding: 0 20px; position: relative; z-index: 10;
+            max-width: 1200px; margin: 0 auto; padding: 80px 20px; position: relative;
         }
-        .section { margin-bottom: 80px; }
+        .section { margin-bottom: 120px; }
         .section-title {
             text-align: center; font-size: 2.5em; font-weight: 800; background: var(--gradient);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -57,10 +77,23 @@
             text-align: center; font-size: 1.2em; color: var(--text-light); margin-bottom: 50px;
             max-width: 700px; margin-left: auto; margin-right: auto;
         }
+        
+        /* Commission Simulator Styles */
         .simulator-section {
             background: white; padding: 60px; border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1); margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
+        .range-info {
+            background: var(--light-pink); padding: 20px; border-radius: 15px; margin-bottom: 30px;
+            text-align: center;
+        }
+        .range-info h3 { color: var(--text-dark); margin-bottom: 15px; font-size: 1.3em; }
+        .range-items { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .range-item {
+            background: white; padding: 15px 25px; border-radius: 10px; border: 2px solid var(--pink);
+        }
+        .range-item strong { display: block; font-size: 1.1em; margin-bottom: 5px; }
+        .range-item span { color: var(--text-light); font-size: 0.9em; }
         .simulator-table-wrapper { overflow-x: auto; margin-bottom: 40px; }
         .simulator-table {
             width: 100%; border-collapse: separate; border-spacing: 0;
@@ -76,25 +109,18 @@
             padding: 25px 20px; background: var(--light-pink);
             border-right: 3px solid white; vertical-align: middle;
         }
-        .label-cell strong {
-            display: block; font-size: 1.1em; color: var(--text-dark); margin-bottom: 10px;
-        }
+        .label-cell strong { display: block; font-size: 1.1em; color: var(--text-dark); margin-bottom: 10px; }
         .label-cell small { display: block; color: var(--text-light); font-size: 0.85em; margin-top: 5px; }
         .input-field {
             width: 100%; padding: 12px 15px; border: 2px solid var(--pink); border-radius: 10px;
             font-size: 1em; font-weight: 600; background: white; color: var(--text-dark);
-            margin-top: 8px; transition: all 0.3s;
+            transition: all 0.3s;
         }
         .input-field:focus {
             outline: none; box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2); border-color: var(--purple);
         }
+        .input-field.error { border-color: #EF4444; background: #FEE2E2; }
         .input-field.small { width: 80px; display: inline-block; margin-right: 5px; }
-        .input-field.tiny {
-            width: 60px; display: inline-block; margin-right: 5px; padding: 8px 10px; font-size: 0.95em;
-        }
-        .commission-inputs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-        .commission-inputs div { display: flex; align-items: center; gap: 5px; }
-        .commission-inputs span { font-size: 0.9em; color: var(--text-light); white-space: nowrap; }
         .result-cell {
             padding: 25px 20px; text-align: center; vertical-align: middle; border-left: 1px solid rgba(0,0,0,0.05);
         }
@@ -108,6 +134,14 @@
         }
         .result-value.money { color: var(--success); font-weight: 800; }
         .result-value.money.large { font-size: 2em; }
+        .percentage-badge {
+            display: inline-block; background: var(--gradient); color: white;
+            padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 1.1em; margin-bottom: 10px;
+        }
+        .warning-text {
+            color: var(--warning); font-size: 0.85em; margin-top: 5px; display: none;
+        }
+        .warning-text.show { display: block; }
         .highlight-row { background: rgba(255, 107, 157, 0.05); }
         .highlight-row .result-cell { border-top: 2px solid var(--pink); border-bottom: 2px solid var(--pink); }
         .divider-row { background: var(--gradient); }
@@ -131,63 +165,211 @@
             background: var(--gradient); -webkit-background-clip: text;
             -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.2em;
         }
+        
+        /* Reseller Packages Styles */
+        .reseller-section {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: white; padding: 80px 20px; margin: 0 -20px;
+        }
+        .packages {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px; max-width: 1200px; margin: 0 auto;
+        }
+        .package {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 25px; padding: 40px 30px; border: 2px solid #333;
+            transition: all 0.3s; position: relative;
+        }
+        .package:hover {
+            transform: translateY(-10px); border-color: var(--pink);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.3);
+        }
+        .package.popular {
+            border-color: var(--purple); transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(157, 108, 255, 0.4);
+        }
+        .popular-badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--gradient); color: white; padding: 8px 20px; border-radius: 20px;
+            font-size: 0.9em; font-weight: bold; white-space: nowrap;
+        }
+        .package-icon { font-size: 4em; text-align: center; margin-bottom: 20px; }
+        .package-name { text-align: center; font-size: 2em; font-weight: 800; margin-bottom: 10px; }
+        .package-subtitle { text-align: center; color: #999; margin-bottom: 30px; }
+        .features { list-style: none; margin-bottom: 30px; }
+        .features li {
+            padding: 12px 0; padding-left: 35px; position: relative;
+            border-bottom: 1px solid #333; font-size: 1em;
+        }
+        .features li:last-child { border-bottom: none; }
+        .features li::before {
+            content: "✓"; position: absolute; left: 0; color: var(--success);
+            font-weight: bold; font-size: 1.3em;
+        }
+        .pricing {
+            background: #1a1a1a; padding: 25px; border-radius: 15px; margin-bottom: 30px;
+        }
+        .pricing-row {
+            display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #333;
+        }
+        .pricing-row:last-child { border-bottom: none; }
+        .pricing-label { color: #999; font-size: 0.95em; }
+        .pricing-value { font-weight: 700; }
+        .pricing-value.green { color: var(--success); font-size: 1.2em; }
+        .total-section-pkg {
+            background: var(--gradient); padding: 25px; border-radius: 15px;
+            text-align: center; margin-bottom: 30px;
+        }
+        .total-label { font-size: 1em; opacity: 0.9; margin-bottom: 10px; }
+        .total-value { font-size: 3em; font-weight: 800; margin-bottom: 5px; }
+        .total-sublabel { font-size: 1.1em; opacity: 0.9; }
+        .profit-box {
+            background: #0a0a0a; padding: 20px; border-radius: 15px;
+            border: 2px solid var(--success); margin-bottom: 20px;
+        }
+        .profit-label { text-align: center; color: #999; margin-bottom: 10px; }
+        .profit-value { text-align: center; font-size: 2.5em; font-weight: 800; color: var(--success); }
+        
+        /* Buttons */
         .btn {
             display: inline-block; padding: 18px 40px; border: none; border-radius: 15px;
-            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s; text-decoration: none;
+            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s;
+            text-decoration: none;
         }
         .btn-gradient { background: var(--gradient); color: white; }
         .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3); }
         .btn-large { font-size: 1.4em; padding: 20px 60px; }
-        footer {
-            background: white; padding: 60px 40px; border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; margin-top: 80px;
+        .btn-full { width: 100%; padding: 20px; }
+        
+        /* FAQ */
+        .faq {
+            background: #1a1a1a; padding: 60px 40px; border-radius: 25px; margin-top: 60px;
+            max-width: 1200px; margin-left: auto; margin-right: auto;
         }
+        .faq h2 { text-align: center; font-size: 2.5em; margin-bottom: 40px; }
+        .faq-item { border-bottom: 1px solid #333; padding: 25px 0; }
+        .faq-question {
+            font-size: 1.3em; font-weight: 700; margin-bottom: 15px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-answer { color: #999; line-height: 1.8; display: none; padding-top: 10px; }
+        .faq-answer.show { display: block; }
+        
+        /* Footer */
+        footer {
+            background: white; padding: 60px 40px; text-align: center;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links {
+                position: absolute; top: 70px; left: 0; right: 0; background: white;
+                flex-direction: column; gap: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                display: none; padding: 20px;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { width: 100%; text-align: center; padding: 15px; }
             .hero h1 { font-size: 2.2em; }
             .hero .subtitle { font-size: 1.2em; }
             .simulator-section { padding: 40px 20px; }
+            .range-items { flex-direction: column; gap: 15px; }
             .simulator-table { font-size: 0.85em; }
             .simulator-table th, .simulator-table td { padding: 15px 10px; }
-            .input-field.tiny { width: 50px; padding: 6px 8px; font-size: 0.9em; }
+            .input-field { font-size: 0.9em; padding: 10px 12px; }
             .result-value { font-size: 1.1em; }
             .result-value.large { font-size: 1.4em; }
             .result-value.money.large { font-size: 1.6em; }
             .btn-large { font-size: 1.2em; padding: 18px 40px; }
+            .packages { grid-template-columns: 1fr; }
+            .package.popular { transform: scale(1); }
+            .total-value { font-size: 2.5em; }
+            .profit-value { font-size: 2em; }
         }
     </style>
 </head>
 <body>
+    <!-- Header Navigation -->
+    <header id="header">
+        <nav>
+            <div class="logo">🩺 IupCare</div>
+            <div class="mobile-toggle" onclick="toggleMobile()">☰</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#comissoes" class="active">Comissões</a>
+                <a href="#revenda">Pacotes Revenda</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contato" class="btn btn-gradient" style="padding: 10px 25px;">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>🩺 Programa de Parceiros IupCare</h1>
-            <p class="subtitle">Transforme clínicas em histórias de sucesso. Construa renda recorrente ajudando profissionais de saúde.</p>
-            <a href="#simulador" class="cta-primary">Simular Meus Ganhos</a>
+            <p class="subtitle">Transforme clínicas em histórias de sucesso. Escolha seu modelo: Comissões Recorrentes ou Revenda de Pacotes!</p>
             <div class="hero-stats">
                 <div class="stat-card"><span class="stat-number">10-30%</span><span class="stat-label">Comissão Recorrente</span></div>
                 <div class="stat-card"><span class="stat-number">2.500+</span><span class="stat-label">Clínicas no Brasil</span></div>
-                <div class="stat-card"><span class="stat-number">R$ 197</span><span class="stat-label">Ticket Médio</span></div>
+                <div class="stat-card"><span class="stat-number">3x-5x</span><span class="stat-label">Lucro na Revenda</span></div>
             </div>
         </div>
     </section>
-    <div class="container">
-        <section id="simulador" class="simulator-section">
-            <h2 class="section-title">💰 Simulador de Ganhos</h2>
-            <p class="section-subtitle">Ajuste os valores à esquerda e veja automaticamente seus ganhos em Bronze, Prata e Ouro</p>
+
+    <!-- Commission Simulator Section -->
+    <div class="container" id="comissoes">
+        <section class="simulator-section">
+            <h2 class="section-title">💰 Simulador de Comissões Recorrentes</h2>
+            <p class="section-subtitle">Preencha os valores nas colunas e veja seus ganhos calculados automaticamente</p>
+            
+            <div class="range-info">
+                <h3>📊 Limites de Clientes Finais por Nível</h3>
+                <div class="range-items">
+                    <div class="range-item">
+                        <strong>🥉 Bronze</strong>
+                        <span>1 a 250 clientes</span>
+                    </div>
+                    <div class="range-item">
+                        <strong>🥈 Prata</strong>
+                        <span>250 a 500 clientes</span>
+                    </div>
+                    <div class="range-item">
+                        <strong>🥇 Ouro</strong>
+                        <span>A partir de 501 clientes</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="simulator-table-wrapper">
                 <table class="simulator-table">
-                    <thead><tr><th class="input-col">Seus Dados</th><th>🥉 Bronze</th><th>🥈 Prata</th><th>🥇 Ouro</th></tr></thead>
+                    <thead><tr><th class="input-col">Categoria</th><th>🥉 Bronze</th><th>🥈 Prata</th><th>🥇 Ouro</th></tr></thead>
                     <tbody>
                         <tr>
-                            <td class="label-cell"><strong>Qtde Clínicas/Consultórios</strong><input type="number" id="qtde-clinicas" class="input-field" value="50" min="1" max="500"></td>
-                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-clinicas">50</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value" id="prata-clinicas">100</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-clinicas">200</span></td>
+                            <td class="label-cell"><strong>Qtde Clínicas/Consultórios</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <input type="number" id="bronze-clinicas" class="input-field" value="50" min="1" max="500">
+                                <div class="warning-text" id="bronze-warning">⚠️ Limite: 250 clientes</div>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <input type="number" id="prata-clinicas" class="input-field" value="100" min="1" max="500">
+                                <div class="warning-text" id="prata-warning">⚠️ Limite: 250-500 clientes</div>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <input type="number" id="ouro-clinicas" class="input-field" value="200" min="1" max="500">
+                                <div class="warning-text" id="ouro-warning">⚠️ Mínimo: 501 clientes</div>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="label-cell"><strong>Profissionais de Saúde por Clínica</strong><input type="number" id="qtde-profissionais" class="input-field" value="5" min="1" max="50"></td>
-                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-profissionais">5</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value" id="prata-profissionais">5</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-profissionais">5</span></td>
+                            <td class="label-cell"><strong>Profissionais de Saúde por Clínica</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <input type="number" id="bronze-profissionais" class="input-field" value="5" min="1" max="50">
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <input type="number" id="prata-profissionais" class="input-field" value="5" min="1" max="50">
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <input type="number" id="ouro-profissionais" class="input-field" value="5" min="1" max="50">
+                            </td>
                         </tr>
                         <tr class="highlight-row">
                             <td class="label-cell"><strong>Clientes Finais Totais</strong><small>(Clínicas × Profissionais)</small></td>
@@ -196,10 +378,28 @@
                             <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-total-clientes">1000</span></td>
                         </tr>
                         <tr>
-                            <td class="label-cell"><strong>Ticket Médio Cliente Final</strong><select id="ticket-medio" class="input-field"><option value="97">R$ 97,00 - Básico</option><option value="197" selected>R$ 197,00 - Premium</option><option value="397">R$ 397,00 - Avançado</option></select></td>
-                            <td class="result-cell bronze-bg"><span class="result-value" id="bronze-ticket">R$ 197,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value" id="prata-ticket">R$ 197,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value" id="ouro-ticket">R$ 197,00</span></td>
+                            <td class="label-cell"><strong>Ticket Médio Cliente Final</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <select id="bronze-ticket" class="input-field">
+                                    <option value="97">R$ 97 - Básico</option>
+                                    <option value="197" selected>R$ 197 - Premium</option>
+                                    <option value="397">R$ 397 - Avançado</option>
+                                </select>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <select id="prata-ticket" class="input-field">
+                                    <option value="97">R$ 97 - Básico</option>
+                                    <option value="197" selected>R$ 197 - Premium</option>
+                                    <option value="397">R$ 397 - Avançado</option>
+                                </select>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <select id="ouro-ticket" class="input-field">
+                                    <option value="97">R$ 97 - Básico</option>
+                                    <option value="197" selected>R$ 197 - Premium</option>
+                                    <option value="397">R$ 397 - Avançado</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr class="highlight-row">
                             <td class="label-cell"><strong>Faturamento Total Mensal</strong><small>(Clientes × Ticket)</small></td>
@@ -209,40 +409,351 @@
                         </tr>
                         <tr class="divider-row"><td colspan="4" class="divider-cell"><div class="divider-content"><span class="divider-icon">💰</span><span class="divider-text">SUAS COMISSÕES MENSAIS</span><span class="divider-icon">💰</span></div></td></tr>
                         <tr>
-                            <td class="label-cell"><strong>Indicador</strong><input type="number" id="comissao-indicador" class="input-field small" value="10" min="0" max="100" step="1"><span>%</span></td>
-                            <td class="result-cell bronze-bg"><span class="result-value money" id="bronze-indicador">R$ 4.925,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value money" id="prata-indicador">R$ 0,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value money" id="ouro-indicador">R$ 0,00</span></td>
+                            <td class="label-cell"><strong>Indicador</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <span class="percentage-badge">10%</span>
+                                <div><span class="result-value money" id="bronze-indicador">R$ 4.925,00</span></div>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <span class="percentage-badge">11%</span>
+                                <div><span class="result-value money" id="prata-indicador">R$ 10.835,00</span></div>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <span class="percentage-badge">12%</span>
+                                <div><span class="result-value money" id="ouro-indicador">R$ 23.640,00</span></div>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="label-cell"><strong>Revendedor / Sales</strong><div class="commission-inputs"><div><input type="number" id="comissao-sales-bronze" class="input-field tiny" value="12" min="0" max="100" step="1"><span>% Bronze</span></div><div><input type="number" id="comissao-sales-prata" class="input-field tiny" value="15" min="0" max="100" step="1"><span>% Prata</span></div><div><input type="number" id="comissao-sales-ouro" class="input-field tiny" value="20" min="0" max="100" step="1"><span>% Ouro</span></div></div></td>
-                            <td class="result-cell bronze-bg"><span class="result-value money" id="bronze-sales">R$ 5.910,00</span></td>
-                            <td class="result-cell prata-bg"><span class="result-value money" id="prata-sales">R$ 14.775,00</span></td>
-                            <td class="result-cell ouro-bg"><span class="result-value money" id="ouro-sales">R$ 39.400,00</span></td>
+                            <td class="label-cell"><strong>Representante</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <span class="percentage-badge">12%</span>
+                                <div><span class="result-value money" id="bronze-sales">R$ 5.910,00</span></div>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <span class="percentage-badge">15%</span>
+                                <div><span class="result-value money" id="prata-sales">R$ 14.775,00</span></div>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <span class="percentage-badge">20%</span>
+                                <div><span class="result-value money" id="ouro-sales">R$ 39.400,00</span></div>
+                            </td>
                         </tr>
                         <tr class="final-row">
-                            <td class="label-cell"><strong>VAR (Value-Added Reseller)</strong><div class="commission-inputs"><div><input type="number" id="comissao-var-bronze" class="input-field tiny" value="22" min="0" max="100" step="1"><span>% Bronze</span></div><div><input type="number" id="comissao-var-prata" class="input-field tiny" value="25" min="0" max="100" step="1"><span>% Prata</span></div><div><input type="number" id="comissao-var-ouro" class="input-field tiny" value="30" min="0" max="100" step="1"><span>% Ouro</span></div></div></td>
-                            <td class="result-cell bronze-bg highlight-result"><span class="result-value money large" id="bronze-var">R$ 10.835,00</span></td>
-                            <td class="result-cell prata-bg highlight-result"><span class="result-value money large" id="prata-var">R$ 24.625,00</span></td>
-                            <td class="result-cell ouro-bg highlight-result"><span class="result-value money large" id="ouro-var">R$ 59.100,00</span></td>
+                            <td class="label-cell"><strong>VAR (Value-Added Reseller)</strong></td>
+                            <td class="result-cell bronze-bg highlight-result">
+                                <span class="percentage-badge">22%</span>
+                                <div><span class="result-value money large" id="bronze-var">R$ 10.835,00</span></div>
+                            </td>
+                            <td class="result-cell prata-bg highlight-result">
+                                <span class="percentage-badge">25%</span>
+                                <div><span class="result-value money large" id="prata-var">R$ 24.625,00</span></div>
+                            </td>
+                            <td class="result-cell ouro-bg highlight-result">
+                                <span class="percentage-badge">30%</span>
+                                <div><span class="result-value money large" id="ouro-var">R$ 59.100,00</span></div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="simulator-cta">
-                <p class="cta-text">💡 <strong>Exemplo:</strong> Como VAR Ouro com 200 clínicas, você ganharia <strong class="highlight-value" id="example-value">R$ 59.100/mês</strong> = <strong class="highlight-value" id="example-year">R$ 709.200/ano</strong></p>
+                <p class="cta-text">💡 <strong>Exemplo:</strong> Como VAR Ouro com <span id="example-clients">1000</span> clientes, você ganharia <strong class="highlight-value" id="example-value">R$ 59.100/mês</strong> = <strong class="highlight-value" id="example-year">R$ 709.200/ano</strong></p>
                 <button class="btn btn-gradient btn-large" onclick="alert('🎉 Em produção, isso abriria o formulário de cadastro!')">🚀 Quero Começar Agora!</button>
             </div>
         </section>
     </div>
-    <footer>
+
+    <!-- Reseller Packages Section -->
+    <section class="reseller-section" id="revenda">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">🎁 Pacotes de Revenda - Lucre 3x a 5x Mais</h2>
+            <p class="section-subtitle" style="color: #999;">Compre pacotes com desconto e revenda com margem garantida!</p>
+            
+            <div class="packages">
+                <!-- Bronze Package -->
+                <div class="package">
+                    <div class="package-icon">🥉</div>
+                    <h3 class="package-name">IupCare Bronze</h3>
+                    <p class="package-subtitle">(Starter)</p>
+                    
+                    <ul class="features">
+                        <li>10 licenças congeladas</li>
+                        <li>6 meses de acesso em cada</li>
+                        <li><strong>Fature até:</strong></li>
+                    </ul>
+                    
+                    <div class="pricing">
+                        <div class="pricing-row">
+                            <span class="pricing-label">Básico (R$ 97/mês):</span>
+                            <span class="pricing-value green">R$ 5.820</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Premium (R$ 197/mês):</span>
+                            <span class="pricing-value green">R$ 11.820</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Avançado (R$ 397/mês):</span>
+                            <span class="pricing-value green">R$ 23.820</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 15px 0;">
+                        <div style="color: #999; margin-bottom: 10px;">No plano mensal (R$99) esse pacote custa:</div>
+                        <div style="font-size: 2em; font-weight: 800; color: #ff4444; text-decoration: line-through; margin-bottom: 10px;">
+                            R$ 5.940
+                        </div>
+                        <div style="color: #999; margin-bottom: 5px;">Adquira neste lançamento por:</div>
+                    </div>
+                    
+                    <div class="total-section-pkg">
+                        <div class="total-label">Pagamento Único</div>
+                        <div class="total-value">R$ 4.455</div>
+                        <div class="total-sublabel">ou 12x R$ 371,25 no PIX</div>
+                        <div style="margin-top: 10px; font-size: 0.95em;">Cada licença sai por R$ 74/mês</div>
+                    </div>
+                    
+                    <div class="profit-box">
+                        <div class="profit-label">💰 Seu Lucro Vendendo Premium:</div>
+                        <div class="profit-value">R$ 7.365</div>
+                    </div>
+                    
+                    <button class="btn btn-gradient btn-full" onclick="comprar('bronze')">Quero Este Pacote</button>
+                </div>
+
+                <!-- Prata Package (Popular) -->
+                <div class="package popular">
+                    <div class="popular-badge">✨ Mais Popular</div>
+                    <div class="package-icon">🥈</div>
+                    <h3 class="package-name">IupCare Prata</h3>
+                    <p class="package-subtitle">(Starter)</p>
+                    
+                    <ul class="features">
+                        <li>20 licenças de 6 meses</li>
+                        <li><strong>Fature até:</strong></li>
+                    </ul>
+                    
+                    <div class="pricing">
+                        <div class="pricing-row">
+                            <span class="pricing-label">Básico (R$ 97/mês):</span>
+                            <span class="pricing-value green">R$ 11.640</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Premium (R$ 197/mês):</span>
+                            <span class="pricing-value green">R$ 23.640</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Avançado (R$ 397/mês):</span>
+                            <span class="pricing-value green">R$ 47.640</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 15px 0;">
+                        <div style="color: #999; margin-bottom: 10px;">No plano mensal (R$149) esse pacote custa:</div>
+                        <div style="font-size: 2em; font-weight: 800; color: #ff4444; text-decoration: line-through; margin-bottom: 10px;">
+                            R$ 17.880
+                        </div>
+                        <div style="color: #999; margin-bottom: 5px;">Adquira neste lançamento por:</div>
+                    </div>
+                    
+                    <div class="total-section-pkg">
+                        <div class="total-label">Pagamento Único</div>
+                        <div class="total-value">R$ 11.622</div>
+                        <div class="total-sublabel">ou 12x R$ 968,50 no PIX</div>
+                        <div style="margin-top: 10px; font-size: 0.95em;">Cada licença sai por R$ 97/mês</div>
+                    </div>
+                    
+                    <div class="profit-box">
+                        <div class="profit-label">💰 Seu Lucro Vendendo Premium:</div>
+                        <div class="profit-value">R$ 12.018</div>
+                    </div>
+                    
+                    <button class="btn btn-gradient btn-full" onclick="comprar('prata')">Quero Este Pacote</button>
+                </div>
+
+                <!-- Ouro Package -->
+                <div class="package">
+                    <div class="package-icon">🥇</div>
+                    <h3 class="package-name">IupCare Ouro</h3>
+                    <p class="package-subtitle">(Starter)</p>
+                    
+                    <ul class="features">
+                        <li>30 licenças de 12 meses</li>
+                        <li><strong>Fature até:</strong></li>
+                    </ul>
+                    
+                    <div class="pricing">
+                        <div class="pricing-row">
+                            <span class="pricing-label">Básico (R$ 97/mês):</span>
+                            <span class="pricing-value green">R$ 34.920</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Premium (R$ 197/mês):</span>
+                            <span class="pricing-value green">R$ 70.920</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Avançado (R$ 397/mês):</span>
+                            <span class="pricing-value green">R$ 142.920</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 15px 0;">
+                        <div style="color: #999; margin-bottom: 10px;">No plano mensal (R$199) esse pacote custa:</div>
+                        <div style="font-size: 2em; font-weight: 800; color: #ff4444; text-decoration: line-through; margin-bottom: 10px;">
+                            R$ 71.640
+                        </div>
+                        <div style="color: #999; margin-bottom: 5px;">Adquira neste lançamento por:</div>
+                    </div>
+                    
+                    <div class="total-section-pkg">
+                        <div class="total-label">Pagamento Único</div>
+                        <div class="total-value">R$ 35.820</div>
+                        <div class="total-sublabel">ou 12x R$ 2.985 no PIX</div>
+                        <div style="margin-top: 10px; font-size: 0.95em;">Cada licença sai por R$ 99/mês</div>
+                    </div>
+                    
+                    <div class="profit-box">
+                        <div class="profit-label">💰 Seu Lucro Vendendo Premium:</div>
+                        <div class="profit-value">R$ 35.100</div>
+                    </div>
+                    
+                    <button class="btn btn-gradient btn-full" onclick="comprar('ouro')">Quero Este Pacote</button>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="faq" id="faq">
+                <h2>Perguntas e Respostas</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Qual é a diferença da licença Starter e PRO?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        A licença Starter inclui recursos básicos ideais para começar, enquanto a PRO oferece funcionalidades avançadas como relatórios detalhados, integrações extras e suporte prioritário.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Qual a diferença entre Comissões e Revenda?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        No modelo de Comissões, você ganha percentual recorrente sobre as vendas que você trouxer. No modelo de Revenda, você compra pacotes com desconto e revende pelo preço cheio, embolsando a diferença.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Até quando vai essa oferta?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Esta é uma oferta de lançamento especial válida por tempo limitado. Recomendamos garantir seu pacote o quanto antes para não perder essa oportunidade.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Posso combinar os dois modelos?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Você pode participar tanto do programa de comissões recorrentes quanto comprar pacotes para revenda. Muitos parceiros utilizam os dois modelos para maximizar seus ganhos.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Posso comprar quantos pacotes?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Você pode comprar quantos pacotes quiser! Muitos revendedores começam com um pacote menor e depois compram mais conforme vão vendendo.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
         <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>IupTec Tecnologia e Desenvolvimento de Sistemas Ltda</strong></p>
         <p style="color: var(--text-light);">Av. Bélgica, 1220, sala 11 - Uberlândia/MG - CEP: 38.405-030<br>CNPJ: 34.001.576/0001-95</p>
         <p style="margin-top: 20px;">📧 parcerias@iupcare.com.br | 📱 (34) 99999-9999</p>
         <p style="margin-top: 30px; color: var(--text-light); font-size: 0.9em;">© 2025 IupCare</p>
     </footer>
+
     <script>
-        const m={bronze:{clinicas:50},prata:{clinicas:100},ouro:{clinicas:200}};function c(){const a=parseInt(document.getElementById('qtde-clinicas').value)||50,b=parseInt(document.getElementById('qtde-profissionais').value)||5,d=parseFloat(document.getElementById('ticket-medio').value)||197,e=parseFloat(document.getElementById('comissao-indicador').value)||10,f=parseFloat(document.getElementById('comissao-sales-bronze').value)||12,g=parseFloat(document.getElementById('comissao-sales-prata').value)||15,h=parseFloat(document.getElementById('comissao-sales-ouro').value)||20,i=parseFloat(document.getElementById('comissao-var-bronze').value)||22,j=parseFloat(document.getElementById('comissao-var-prata').value)||25,k=parseFloat(document.getElementById('comissao-var-ouro').value)||30;n('bronze',m.bronze.clinicas,b,d,e,f,i);n('prata',m.prata.clinicas,b,d,0,g,j);n('ouro',m.ouro.clinicas,b,d,0,h,k);u()}function n(a,b,d,e,f,g,h){const i=b*d,j=i*e,k=j*(f/100),l=j*(g/100),m=j*(h/100);document.getElementById(a+'-clinicas').textContent=b;document.getElementById(a+'-profissionais').textContent=d;document.getElementById(a+'-total-clientes').textContent=i;document.getElementById(a+'-ticket').textContent=p(e);document.getElementById(a+'-faturamento').textContent=p(j);document.getElementById(a+'-indicador').textContent=p(k);document.getElementById(a+'-sales').textContent=p(l);document.getElementById(a+'-var').textContent=p(m)}function u(){const a=document.getElementById('ouro-var').textContent,b=parseFloat(a.replace('R$','').replace(/\./g,'').replace(',','.'))||0,c=b*12;document.getElementById('example-value').textContent=p(b);document.getElementById('example-year').textContent=p(c)}function p(a){return'R$ '+a.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}document.getElementById('qtde-clinicas').addEventListener('input',c);document.getElementById('qtde-profissionais').addEventListener('input',c);document.getElementById('ticket-medio').addEventListener('change',c);document.getElementById('comissao-indicador').addEventListener('input',c);document.getElementById('comissao-sales-bronze').addEventListener('input',c);document.getElementById('comissao-sales-prata').addEventListener('input',c);document.getElementById('comissao-sales-ouro').addEventListener('input',c);document.getElementById('comissao-var-bronze').addEventListener('input',c);document.getElementById('comissao-var-prata').addEventListener('input',c);document.getElementById('comissao-var-ouro').addEventListener('input',c);c();document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(a){a.preventDefault();const b=document.querySelector(this.getAttribute('href'));b&&b.scrollIntoView({behavior:'smooth',block:'start'})})});
+        // Commission Simulator
+        const comissoes={bronze:{indicador:10,representante:12,var:22},prata:{indicador:11,representante:15,var:25},ouro:{indicador:12,representante:20,var:30}};const limites={bronze:{min:1,max:250},prata:{min:250,max:500},ouro:{min:501,max:999999}};function formatMoney(a){return'R$ '+a.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}function validarLimites(a,b){const c=document.getElementById(a+'-clinicas'),d=document.getElementById(a+'-profissionais'),e=document.getElementById(a+'-warning');let f=!0;if(b<limites[a].min){e.textContent='⚠️ Mínimo: '+limites[a].min+' clientes';e.classList.add('show');c.classList.add('error');d.classList.add('error');f=!1}else if(b>limites[a].max&&'ouro'!==a){e.textContent='⚠️ Máximo: '+limites[a].max+' clientes';e.classList.add('show');c.classList.add('error');d.classList.add('error');f=!1}else{e.classList.remove('show');c.classList.remove('error');d.classList.remove('error')}return f}function calcularNivel(a){const b=parseInt(document.getElementById(a+'-clinicas').value)||0,c=parseInt(document.getElementById(a+'-profissionais').value)||0,d=parseFloat(document.getElementById(a+'-ticket').value)||0,e=b*c,f=e*d;validarLimites(a,e);const g=f*(comissoes[a].indicador/100),h=f*(comissoes[a].representante/100),i=f*(comissoes[a].var/100);document.getElementById(a+'-total-clientes').textContent=e;document.getElementById(a+'-faturamento').textContent=formatMoney(f);document.getElementById(a+'-indicador').textContent=formatMoney(g);document.getElementById(a+'-sales').textContent=formatMoney(h);document.getElementById(a+'-var').textContent=formatMoney(i)}function calcularTodos(){calcularNivel('bronze');calcularNivel('prata');calcularNivel('ouro');atualizarExemplo()}function atualizarExemplo(){const a=document.getElementById('ouro-total-clientes').textContent,b=document.getElementById('ouro-var').textContent,c=parseFloat(b.replace('R$','').replace(/\./g,'').replace(',','.'))||0,d=c*12;document.getElementById('example-clients').textContent=a;document.getElementById('example-value').textContent=formatMoney(c);document.getElementById('example-year').textContent=formatMoney(d)}const inputs=['bronze-clinicas','bronze-profissionais','bronze-ticket','prata-clinicas','prata-profissionais','prata-ticket','ouro-clinicas','ouro-profissionais','ouro-ticket'];inputs.forEach(a=>{const b=document.getElementById(a);b&&(b.addEventListener('input',calcularTodos),b.addEventListener('change',calcularTodos))});calcularTodos();
+        
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span');
+            answer.classList.toggle('show');
+            icon.textContent = answer.classList.contains('show') ? '▲' : '▼';
+        }
+        
+        // Purchase
+        function comprar(pacote) {
+            alert('🎉 Redirecionando para checkout do pacote ' + pacote.toUpperCase() + '!\n\nEm produção, isso abriria a página de pagamento.');
+        }
+        
+        // Mobile Toggle
+        function toggleMobile() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        
+        // Smooth Scroll & Active Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Update active nav
+                    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Close mobile menu
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Intersection Observer for nav active state
+        const sections = document.querySelectorAll('section[id], div[id]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    if (id && (id === 'comissoes' || id === 'revenda' || id === 'faq')) {
+                        document.querySelectorAll('.nav-links a').forEach(a => {
+                            a.classList.remove('active');
+                            if (a.getAttribute('href') === '#' + id) {
+                                a.classList.add('active');
+                            }
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        sections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
