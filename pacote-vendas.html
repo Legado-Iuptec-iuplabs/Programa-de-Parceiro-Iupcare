@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pacotes de Revenda - Programa de Parceiros IupCare</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Header Navegação -->
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <img src="images/logo.png" alt="IupCare Logo">
+            </div>
+            <div class="mobile-toggle" onclick="toggleMobile()">☰</div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="btn">Comissões</a>
+                <a href="pacote-vendas.html" style="color: white;" class="btn-gradient">Pacotes Revenda</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Pacotes para revendedores Section -->
+    <section class="reseller-section" id="revenda">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-icon">🎁</span>
+                Pacotes de Revenda - Lucre 3x a 5x Mais
+            </h2>
+            <p class="section-subtitle">Compre pacotes com desconto e revenda com margem garantida!</p>
+            
+            <div class="packages">
+                <!-- Bronze Pacite -->
+                <div class="package">
+                    <div class="package-icon">🥉</div>
+                    <h3 class="package-name">IupCare Bronze</h3>
+                    <p class="package-subtitle">(Starter)</p>
+                    
+                    <ul class="features">
+                        <li>10 licenças congeladas</li>
+                        <li>6 meses de acesso em cada</li>
+                        <li><strong>Fature até:</strong></li>
+                    </ul>
+                    
+                    <div class="pricing">
+                        <div class="pricing-row">
+                            <span class="pricing-label">Básico (R$ 97/mês):</span>
+                            <span class="pricing-value green">R$ 5.820</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Premium (R$ 197/mês):</span>
+                            <span class="pricing-value green">R$ 11.820</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Avançado (R$ 397/mês):</span>
+                            <span class="pricing-value green">R$ 23.820</span>
+                        </div>
+                    </div>
+                    
+                    <div class="package-discount">
+                        <div style="color: #999; font-size: 0.95em;" class="discount-label">No plano mensal (R$99) esse pacote custa:</div>
+                        <div class="discount-original">R$ 5.940</div>
+                        <div style="color: #999; font-size: 0.95em;" class="discount-text">Adquira neste lançamento por:</div>
+                    </div>
+                    
+                    <div class="total-section-pkg">
+                        <div class="total-label">Pagamento Único</div>
+                        <div class="total-value">R$ 4.455</div>
+                        <div class="total-sublabel">ou 12x R$ 371,25 no PIX</div>
+                        <div class="license-price">Cada licença sai por R$ 74/mês</div>
+                    </div>
+                    
+                    <div class="profit-box">
+                        <div class="profit-label">💰 Seu Lucro Vendendo Premium:</div>
+                        <div class="profit-value">R$ 7.365</div>
+                    </div>
+                    
+                    <button class="btn btn-gradient btn-full" onclick="comprar('bronze')">Quero Este Pacote</button>
+                </div>
+
+                <!-- Prata Pacite (Popular) -->
+                <div class="package popular">
+                    <div class="popular-badge">✨ Mais Popular</div>
+                    <div class="package-icon">🥈</div>
+                    <h3 class="package-name">IupCare Prata</h3>
+                    <p class="package-subtitle">(Starter)</p>
+                    
+                    <ul class="features">
+                        <li>20 licenças de 6 meses</li>
+                        <li><strong>Fature até:</strong></li>
+                    </ul>
+                    
+                    <div class="pricing">
+                        <div class="pricing-row">
+                            <span class="pricing-label">Básico (R$ 97/mês):</span>
+                            <span class="pricing-value green">R$ 11.640</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Premium (R$ 197/mês):</span>
+                            <span class="pricing-value green">R$ 23.640</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Avançado (R$ 397/mês):</span>
+                            <span class="pricing-value green">R$ 47.640</span>
+                        </div>
+                    </div>
+                    
+                    <div class="package-discount">
+                        <div style="color: #999; font-size: 0.95em;" class="discount-label">No plano mensal (R$149) esse pacote custa:</div>
+                        <div class="discount-original">R$ 17.880</div>
+                        <div style="color: #999; font-size: 0.95em;" class="discount-text">Adquira neste lançamento por:</div>
+                    </div>
+                    
+                    <div class="total-section-pkg">
+                        <div class="total-label">Pagamento Único</div>
+                        <div class="total-value">R$ 11.622</div>
+                        <div class="total-sublabel">ou 12x R$ 968,50 no PIX</div>
+                        <div class="license-price">Cada licença sai por R$ 97/mês</div>
+                    </div>
+                    
+                    <div class="profit-box">
+                        <div class="profit-label">💰 Seu Lucro Vendendo Premium:</div>
+                        <div class="profit-value">R$ 12.018</div>
+                    </div>
+                    
+                    <button class="btn btn-gradient btn-full" onclick="comprar('prata')">Quero Este Pacote</button>
+                </div>
+
+                <!-- Ouro Pacite -->
+                <div class="package">
+                    <div class="package-icon">🥇</div>
+                    <h3 class="package-name">IupCare Ouro</h3>
+                    <p class="package-subtitle">(Starter)</p>
+                    
+                    <ul class="features">
+                        <li>30 licenças de 12 meses</li>
+                        <li><strong>Fature até:</strong></li>
+                    </ul>
+                    
+                    <div class="pricing">
+                        <div class="pricing-row">
+                            <span class="pricing-label">Básico (R$ 97/mês):</span>
+                            <span class="pricing-value green">R$ 34.920</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Premium (R$ 197/mês):</span>
+                            <span class="pricing-value green">R$ 70.920</span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="pricing-label">Avançado (R$ 397/mês):</span>
+                            <span class="pricing-value green">R$ 142.920</span>
+                        </div>
+                    </div>
+                    
+                    <div class="package-discount">
+                        <div style="color: #999; font-size: 0.95em;" class="discount-label">No plano mensal (R$199) esse pacote custa:</div>
+                        <div class="discount-original">R$ 71.640</div>
+                        <div style="color: #999; font-size: 0.95em;" class="discount-text">Adquira neste lançamento por:</div>
+                    </div>
+                    
+                    <div class="total-section-pkg">
+                        <div class="total-label">Pagamento Único</div>
+                        <div class="total-value">R$ 35.820</div>
+                        <div class="total-sublabel">ou 12x R$ 2.985 no PIX</div>
+                        <div class="license-price">Cada licença sai por R$ 99/mês</div>
+                    </div>
+                    
+                    <div class="profit-box">
+                        <div class="profit-label">💰 Seu Lucro Vendendo Premium:</div>
+                        <div class="profit-value">R$ 35.100</div>
+                    </div>
+                    
+                    <button class="btn btn-gradient btn-full" onclick="comprar('ouro')">Quero Este Pacote</button>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="faq" id="faq">
+                <h2>Perguntas e Respostas</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Qual é a diferença da licença Starter e PRO?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        A licença Starter inclui recursos básicos ideais para começar, enquanto a PRO oferece funcionalidades avançadas como relatórios detalhados, integrações extras e suporte prioritário.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Qual a diferença entre Comissões e Revenda?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        No modelo de Comissões, você ganha percentual recorrente sobre as vendas que você trouxer. No modelo de Revenda, você compra pacotes com desconto e revende pelo preço cheio, embolsando a diferença.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Até quando vai essa oferta?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Esta é uma oferta de lançamento especial válida por tempo limitado. Recomendamos garantir seu pacote o quanto antes para não perder essa oportunidade.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Posso combinar os dois modelos?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Você pode participar tanto do programa de comissões recorrentes quanto comprar pacotes para revenda. Muitos parceiros utilizam os dois modelos para maximizar seus ganhos.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Posso comprar quantos pacotes?
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Você pode comprar quantos pacotes quiser! Muitos revendedores começam com um pacote menor e depois compram mais conforme vão vendendo.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>IupTec Tecnologia e Desenvolvimento de Sistemas Ltda</strong></p>
+        <p style="color: var(--text-light);">Av. Bélgica, 1220, sala 11 - Uberlândia/MG - CEP: 38.405-030<br>CNPJ: 34.001.576/0001-95</p>
+        <p style="margin-top: 20px;">📧 parcerias@iupcare.com.br | 📱 (34) 99999-9999</p>
+        <p style="margin-top: 30px; color: var(--text-light); font-size: 0.9em;">© 2025 IupCare</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/faq.js"></script>
+</body>
+</html>
