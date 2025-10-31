@@ -3,1718 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programa de Parceiros IupCare - Transforme Vidas, Construa Renda</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Programa de Parceiros IupCare</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            /* Cores IupCare */
-            --pink: #FF6B9D;
-            --purple: #9D6CFF;
-            --light-pink: #FFF0F5;
-            --light-purple: #F5F0FF;
-            --gradient: linear-gradient(135deg, #FF6B9D 0%, #9D6CFF 100%);
-            --text-dark: #2D3748;
-            --text-light: #718096;
-            --success: #48BB78;
-            --warning: #ECC94B;
-            --white: #FFFFFF;
+            --pink: #FF6B9D; --purple: #9D6CFF; --light-pink: #FFF0F5;
+            --light-purple: #F5F0FF; --gradient: linear-gradient(135deg, #FF6B9D 0%, #9D6CFF 100%);
+            --text-dark: #2D3748; --text-light: #718096; --success: #48BB78; --white: #FFFFFF;
+            --warning: #F59E0B;
         }
-        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark); line-height: 1.6;
             background: linear-gradient(180deg, var(--light-pink) 0%, var(--white) 50%, var(--light-purple) 100%);
         }
-        
-        /* Hero Section */
         .hero {
-            background: var(--gradient);
-            color: white;
-            padding: 80px 20px 120px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            background: var(--gradient); color: white; padding: 80px 20px 120px;
+            text-align: center; position: relative; overflow: hidden;
         }
-        
         .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            top: -300px;
-            right: -200px;
+            content: ''; position: absolute; width: 600px; height: 600px;
+            background: rgba(255, 255, 255, 0.1); border-radius: 50%; top: -300px; right: -200px;
         }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            bottom: -200px;
-            left: -100px;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            max-width: 200px;
-            margin-bottom: 40px;
-            filter: brightness(0) invert(1);
-        }
-        
-        .hero h1 {
-            font-size: 3.5em;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .hero .subtitle {
-            font-size: 1.5em;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-        
+        .hero-content { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; }
+        .hero h1 { font-size: 3.5em; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero .subtitle { font-size: 1.5em; margin-bottom: 40px; opacity: 0.95; font-weight: 300; }
         .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px; margin-top: 60px; max-width: 900px; margin-left: auto; margin-right: auto;
         }
-        
         .stat-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);
+            padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .stat-number {
-            font-size: 3em;
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 1em;
-            opacity: 0.9;
-        }
-        
+        .stat-number { font-size: 3em; font-weight: bold; margin-bottom: 5px; display: block; }
+        .stat-label { font-size: 1em; opacity: 0.9; }
         .cta-primary {
-            display: inline-block;
-            background: white;
-            color: var(--pink);
-            padding: 20px 50px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.3em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-decoration: none;
-            margin-top: 20px;
+            display: inline-block; background: white; color: var(--pink); padding: 20px 50px;
+            border: none; border-radius: 50px; font-size: 1.3em; font-weight: bold; cursor: pointer;
+            transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-decoration: none; margin-top: 20px;
         }
-        
-        .cta-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        /* Container */
+        .cta-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
         .container {
-            max-width: 1200px;
-            margin: -80px auto 80px;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
+            max-width: 1200px; margin: -80px auto 80px; padding: 0 20px; position: relative; z-index: 10;
         }
-        
-        .section {
-            margin-bottom: 80px;
-        }
-        
+        .section { margin-bottom: 80px; }
         .section-title {
-            text-align: center;
-            font-size: 2.5em;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
+            text-align: center; font-size: 2.5em; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 20px;
         }
-        
         .section-subtitle {
-            text-align: center;
-            font-size: 1.2em;
-            color: var(--text-light);
-            margin-bottom: 50px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            text-align: center; font-size: 1.2em; color: var(--text-light); margin-bottom: 50px;
+            max-width: 700px; margin-left: auto; margin-right: auto;
         }
-        
-        /* Partner Tiers */
-        .tiers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        
-        .tier-card {
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            transition: all 0.4s;
-            position: relative;
-            border: 3px solid transparent;
-        }
-        
-        .tier-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 30px 80px rgba(255, 107, 157, 0.3);
-        }
-        
-        .tier-card.prata {
-            border-color: var(--pink);
-            transform: scale(1.05);
-            box-shadow: 0 25px 70px rgba(255, 107, 157, 0.25);
-        }
-        
-        .tier-card.prata:hover {
-            transform: scale(1.05) translateY(-15px);
-        }
-        
-        .tier-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gradient);
-            color: white;
-            padding: 8px 25px;
-            border-radius: 30px;
-            font-size: 0.85em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .tier-badge.bronze {
-            background: linear-gradient(135deg, #CD7F32 0%, #B8860B 100%);
-        }
-        
-        .tier-badge.prata {
-            background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
-        }
-        
-        .tier-badge.ouro {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-        }
-        
-        .tier-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .tier-name {
-            font-size: 2em;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        
-        .tier-type {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-        
-        .commission-box {
-            background: var(--light-pink);
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            margin: 25px 0;
-        }
-        
-        .commission-label {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-bottom: 10px;
-        }
-        
-        .commission-value {
-            font-size: 3em;
-            font-weight: bold;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .commission-value.editable {
-            border: 2px dashed var(--pink);
-            padding: 5px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: inline-block;
-            min-width: 100px;
-        }
-        
-        .commission-value.editable:hover {
-            background: white;
-        }
-        
-        .targets {
-            background: var(--light-purple);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-        
-        .targets h4 {
-            color: var(--purple);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-        
-        .target-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(157, 108, 255, 0.2);
-        }
-        
-        .target-item:last-child {
-            border-bottom: none;
-        }
-        
-        .target-label {
-            color: var(--text-dark);
-        }
-        
-        .target-value {
-            font-weight: bold;
-            color: var(--purple);
-        }
-        
-        .activities-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        
-        .activities-list li {
-            padding: 12px 0;
-            padding-left: 35px;
-            position: relative;
-            font-size: 1em;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .activities-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .activities-list li::before {
-            content: "💚";
-            position: absolute;
-            left: 0;
-            font-size: 1.3em;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 20px;
-        }
-        
-        .btn-outline {
-            background: white;
-            color: var(--pink);
-            border: 2px solid var(--pink);
-        }
-        
-        .btn-gradient {
-            background: var(--gradient);
-            color: white;
-        }
-        
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
-        }
-        
-        /* Comparison Table */
-        .comparison-section {
-            background: white;
-            padding: 60px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 60px;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 30px;
-        }
-        
-        .comparison-table thead tr {
-            background: var(--gradient);
-            color: white;
-        }
-        
-        .comparison-table th {
-            padding: 20px;
-            font-size: 1.1em;
-            font-weight: 700;
-        }
-        
-        .comparison-table td {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .comparison-table tbody tr:hover {
-            background: var(--light-pink);
-        }
-        
-        .yes {
-            color: var(--success);
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-        
-        .no {
-            color: #FC8181;
-            font-size: 1.8em;
-        }
-        
-        /* Price Cards */
-        .prices-section {
-            background: white;
-            padding: 60px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 60px;
-        }
-        
-        .price-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .price-card {
-            background: var(--light-pink);
-            padding: 40px 30px;
-            border-radius: 25px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 3px solid transparent;
-        }
-        
-        .price-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--pink);
-        }
-        
-        .price-card.featured {
-            background: var(--gradient);
-            color: white;
-            transform: scale(1.08);
-        }
-        
-        .price-card.featured:hover {
-            transform: scale(1.08) translateY(-10px);
-        }
-        
-        .price-name {
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .price-value {
-            font-size: 3em;
-            font-weight: 800;
-            margin: 20px 0;
-        }
-        
-        .price-period {
-            font-size: 1em;
-            opacity: 0.8;
-        }
-        
-        /* Benefits */
-        .benefits-section {
-            background: white;
-            padding: 60px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 60px;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-        
-        .benefit-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-        
-        .benefit-card:hover {
-            background: var(--light-pink);
-            transform: translateY(-5px);
-        }
-        
-        .benefit-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-        }
-        
-        .benefit-title {
-            font-size: 1.4em;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-        
-        .benefit-text {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: var(--gradient);
-            color: white;
-            padding: 80px 40px;
-            border-radius: 30px;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .cta-section h2 {
-            font-size: 3em;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.3em;
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        
-        /* Footer */
-        footer {
-            background: white;
-            padding: 60px 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .footer-logo {
-            max-width: 150px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--pink);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--purple);
-        }
-        
-        /* Edit Mode */
-        .edit-mode-banner {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: none;
-        }
-        
-        .edit-mode-banner.active {
-            display: block;
-        }
-        
-        .btn-edit {
-            background: var(--gradient);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 5px;
-        }
-        
-        /* Simulator Section */
         .simulator-section {
-            background: white;
-            padding: 60px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 60px;
+            background: white; padding: 60px; border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); margin-bottom: 60px;
         }
-        
-        .simulator-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .simulator-table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 40px;
-        }
-        
-        .simulator-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        
-        .simulator-table thead tr {
-            background: var(--gradient);
-            color: white;
-        }
-        
-        .simulator-table th {
-            padding: 25px 20px;
-            font-size: 1.3em;
-            font-weight: 800;
+        .range-info {
+            background: var(--light-pink); padding: 20px; border-radius: 15px; margin-bottom: 30px;
             text-align: center;
         }
-        
-        .simulator-table th.input-col {
-            text-align: left;
-            width: 35%;
+        .range-info h3 {
+            color: var(--text-dark); margin-bottom: 15px; font-size: 1.3em;
         }
-        
-        .simulator-table th.bronze-col,
-        .simulator-table th.prata-col,
-        .simulator-table th.ouro-col {
-            width: 21.67%;
+        .range-items {
+            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
         }
-        
-        .simulator-table tbody tr {
+        .range-item {
+            background: white; padding: 15px 25px; border-radius: 10px;
+            border: 2px solid var(--pink);
+        }
+        .range-item strong { display: block; font-size: 1.1em; margin-bottom: 5px; }
+        .range-item span { color: var(--text-light); font-size: 0.9em; }
+        .simulator-table-wrapper { overflow-x: auto; margin-bottom: 40px; }
+        .simulator-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .simulator-table thead tr { background: var(--gradient); color: white; }
+        .simulator-table th {
+            padding: 25px 20px; font-size: 1.3em; font-weight: 800; text-align: center;
+        }
+        .simulator-table th.input-col { text-align: left; width: 35%; }
+        .simulator-table tbody tr:hover { background: rgba(255, 107, 157, 0.05); }
+        .label-cell {
+            padding: 25px 20px; background: var(--light-pink);
+            border-right: 3px solid white; vertical-align: middle;
+        }
+        .label-cell strong {
+            display: block; font-size: 1.1em; color: var(--text-dark); margin-bottom: 10px;
+        }
+        .label-cell small { display: block; color: var(--text-light); font-size: 0.85em; margin-top: 5px; }
+        .input-field {
+            width: 100%; padding: 12px 15px; border: 2px solid var(--pink); border-radius: 10px;
+            font-size: 1em; font-weight: 600; background: white; color: var(--text-dark);
             transition: all 0.3s;
         }
-        
-        .simulator-table tbody tr:hover {
-            background: rgba(255, 107, 157, 0.05);
+        .input-field:focus {
+            outline: none; box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2); border-color: var(--purple);
         }
-        
-        .label-cell {
-            padding: 25px 20px;
-            background: var(--light-pink);
-            border-right: 3px solid white;
-            vertical-align: middle;
+        .input-field.error {
+            border-color: #EF4444; background: #FEE2E2;
         }
-        
-        .label-cell strong {
-            display: block;
-            font-size: 1.1em;
-            color: var(--text-dark);
+        .input-field.small { width: 80px; display: inline-block; margin-right: 5px; }
+        .result-cell {
+            padding: 25px 20px; text-align: center; vertical-align: middle; border-left: 1px solid rgba(0,0,0,0.05);
+        }
+        .bronze-bg { background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%); }
+        .prata-bg { background: linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(128, 128, 128, 0.15) 100%); }
+        .ouro-bg { background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%); }
+        .result-value { display: block; font-size: 1.3em; font-weight: 700; color: var(--text-dark); }
+        .result-value.large {
+            font-size: 1.8em; font-weight: 800; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .result-value.money { color: var(--success); font-weight: 800; }
+        .result-value.money.large { font-size: 2em; }
+        .percentage-badge {
+            display: inline-block; background: var(--gradient); color: white;
+            padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 1.1em;
             margin-bottom: 10px;
         }
-        
-        .label-cell small {
-            display: block;
-            color: var(--text-light);
-            font-size: 0.85em;
-            margin-top: 5px;
+        .warning-text {
+            color: var(--warning); font-size: 0.85em; margin-top: 5px; display: none;
         }
-        
-        .input-field {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--pink);
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600;
-            background: white;
-            color: var(--text-dark);
-            margin-top: 8px;
-            transition: all 0.3s;
-        }
-        
-        .input-field:focus {
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.2);
-            border-color: var(--purple);
-        }
-        
-        .input-field.small {
-            width: 80px;
-            display: inline-block;
-            margin-right: 5px;
-        }
-        
-        .input-field.tiny {
-            width: 60px;
-            display: inline-block;
-            margin-right: 5px;
-            padding: 8px 10px;
-            font-size: 0.95em;
-        }
-        
-        .commission-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .commission-inputs div {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .commission-inputs span {
-            font-size: 0.9em;
-            color: var(--text-light);
-            white-space: nowrap;
-        }
-        
-        .result-cell {
-            padding: 25px 20px;
-            text-align: center;
-            vertical-align: middle;
-            border-left: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .bronze-bg {
-            background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%);
-        }
-        
-        .prata-bg {
-            background: linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(128, 128, 128, 0.15) 100%);
-        }
-        
-        .ouro-bg {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%);
-        }
-        
-        .result-value {
-            display: block;
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        
-        .result-value.large {
-            font-size: 1.8em;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .result-value.money {
-            color: var(--success);
-            font-weight: 800;
-        }
-        
-        .result-value.money.large {
-            font-size: 2em;
-        }
-        
-        .highlight-row {
-            background: rgba(255, 107, 157, 0.05);
-        }
-        
-        .highlight-row .result-cell {
-            border-top: 2px solid var(--pink);
-            border-bottom: 2px solid var(--pink);
-        }
-        
-        .divider-row {
-            background: var(--gradient);
-        }
-        
-        .divider-cell {
-            padding: 20px;
-        }
-        
+        .warning-text.show { display: block; }
+        .highlight-row { background: rgba(255, 107, 157, 0.05); }
+        .highlight-row .result-cell { border-top: 2px solid var(--pink); border-bottom: 2px solid var(--pink); }
+        .divider-row { background: var(--gradient); }
+        .divider-cell { padding: 20px; }
         .divider-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            color: white;
+            display: flex; align-items: center; justify-content: center; gap: 20px; color: white;
         }
-        
-        .divider-icon {
-            font-size: 2em;
-        }
-        
-        .divider-text {
-            font-size: 1.3em;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-        
-        .final-row {
-            background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-purple) 100%);
-        }
-        
-        .final-row .result-cell {
-            border-bottom: 4px solid var(--purple);
-        }
-        
-        .highlight-result {
-            position: relative;
-        }
-        
+        .divider-icon { font-size: 2em; }
+        .divider-text { font-size: 1.3em; font-weight: 800; letter-spacing: 2px; }
+        .final-row { background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-purple) 100%); }
+        .final-row .result-cell { border-bottom: 4px solid var(--purple); }
+        .highlight-result { position: relative; }
         .highlight-result::before {
-            content: '⭐';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5em;
+            content: '⭐'; position: absolute; top: 10px; right: 10px; font-size: 1.5em;
         }
-        
         .simulator-cta {
-            background: var(--light-pink);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
+            background: var(--light-pink); padding: 40px; border-radius: 20px; text-align: center;
         }
-        
-        .cta-text {
-            font-size: 1.2em;
-            color: var(--text-dark);
-            margin-bottom: 25px;
-            line-height: 1.8;
-        }
-        
+        .cta-text { font-size: 1.2em; color: var(--text-dark); margin-bottom: 25px; line-height: 1.8; }
         .highlight-value {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.2em;
+            background: var(--gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.2em;
         }
-        
-        .btn-large {
-            font-size: 1.4em;
-            padding: 20px 60px;
+        .btn {
+            display: inline-block; padding: 18px 40px; border: none; border-radius: 15px;
+            font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s; text-decoration: none;
         }
-        
-        /* Responsive */
+        .btn-gradient { background: var(--gradient); color: white; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3); }
+        .btn-large { font-size: 1.4em; padding: 20px 60px; }
+        footer {
+            background: white; padding: 60px 40px; border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; margin-top: 80px;
+        }
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2em;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.2em;
-            }
-            
-            .tiers-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .tier-card.prata {
-                transform: scale(1);
-            }
-            
-            .comparison-section,
-            .prices-section,
-            .benefits-section,
-            .cta-section,
-            footer,
-            .simulator-section {
-                padding: 40px 20px;
-            }
-            
-            .simulator-controls {
-                padding: 30px 20px;
-            }
-            
-            .results-section {
-                padding: 30px 20px;
-            }
-            
-            .comparison-table {
-                font-size: 0.85em;
-            }
-            
-            .comparison-table th,
-            .comparison-table td {
-                padding: 10px;
-            }
-            
-            .control-value {
-                font-size: 2.5em;
-            }
-            
-            .result-value-big {
-                font-size: 2.2em;
-            }
-            
-            /* Simulator table responsive */
-            .simulator-table {
-                font-size: 0.85em;
-            }
-            
-            .simulator-table th,
-            .simulator-table td {
-                padding: 15px 10px;
-            }
-            
-            .simulator-table th.input-col {
-                font-size: 1.1em;
-            }
-            
-            .label-cell strong {
-                font-size: 1em;
-            }
-            
-            .input-field {
-                font-size: 0.95em;
-                padding: 10px 12px;
-            }
-            
-            .input-field.tiny {
-                width: 50px;
-                padding: 6px 8px;
-                font-size: 0.9em;
-            }
-            
-            .commission-inputs {
-                gap: 6px;
-            }
-            
-            .commission-inputs span {
-                font-size: 0.8em;
-            }
-            
-            .result-value {
-                font-size: 1.1em;
-            }
-            
-            .result-value.large {
-                font-size: 1.4em;
-            }
-            
-            .result-value.money.large {
-                font-size: 1.6em;
-            }
-            
-            .divider-icon {
-                font-size: 1.5em;
-            }
-            
-            .divider-text {
-                font-size: 1em;
-                letter-spacing: 1px;
-            }
-            
-            .cta-text {
-                font-size: 1em;
-            }
-            
-            .btn-large {
-                font-size: 1.2em;
-                padding: 18px 40px;
-            }
+            .hero h1 { font-size: 2.2em; }
+            .hero .subtitle { font-size: 1.2em; }
+            .simulator-section { padding: 40px 20px; }
+            .range-items { flex-direction: column; gap: 15px; }
+            .simulator-table { font-size: 0.85em; }
+            .simulator-table th, .simulator-table td { padding: 15px 10px; }
+            .input-field { font-size: 0.9em; padding: 10px 12px; }
+            .result-value { font-size: 1.1em; }
+            .result-value.large { font-size: 1.4em; }
+            .result-value.money.large { font-size: 1.6em; }
+            .btn-large { font-size: 1.2em; padding: 18px 40px; }
         }
     </style>
 </head>
 <body>
-    <!-- Edit Mode Banner -->
-    <div class="edit-mode-banner" id="editBanner">
-        <p style="margin-bottom: 10px;">✏️ <strong>Modo de Edição Ativo</strong></p>
-        <button class="btn-edit" onclick="saveChanges()">💾 Salvar Alterações</button>
-        <button class="btn-edit" onclick="toggleEditMode()">❌ Sair</button>
-    </div>
-    
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>🩺 Programa de Parceiros IupCare</h1>
             <p class="subtitle">Transforme clínicas em histórias de sucesso. Construa renda recorrente ajudando profissionais de saúde.</p>
-            <a href="#niveis" class="cta-primary">Quero Ser Parceiro</a>
-            
+            <a href="#simulador" class="cta-primary">Simular Meus Ganhos</a>
             <div class="hero-stats">
-                <div class="stat-card">
-                    <span class="stat-number">10-30%</span>
-                    <span class="stat-label">Comissão Recorrente</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">2.500+</span>
-                    <span class="stat-label">Clínicas no Brasil</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">R$ 197</span>
-                    <span class="stat-label">Ticket Médio</span>
-                </div>
+                <div class="stat-card"><span class="stat-number">10-30%</span><span class="stat-label">Comissão Recorrente</span></div>
+                <div class="stat-card"><span class="stat-number">2.500+</span><span class="stat-label">Clínicas no Brasil</span></div>
+                <div class="stat-card"><span class="stat-number">R$ 197</span><span class="stat-label">Ticket Médio</span></div>
             </div>
         </div>
     </section>
-    
-    <!-- Main Container -->
     <div class="container">
-        <!-- Níveis de Parceria -->
-        <section id="niveis" class="section">
-            <h2 class="section-title">Escolha Seu Nível de Parceria</h2>
-            <p class="section-subtitle">
-                Comece como Bronze e evolua conforme seus resultados. Quanto mais você cresce, mais você ganha.
-            </p>
-            
-            <div class="tiers-grid">
-                <!-- Bronze -->
-                <div class="tier-card bronze-card">
-                    <div class="tier-badge bronze">Bronze</div>
-                    <div class="tier-icon">🥉</div>
-                    <h3 class="tier-name">Indicador</h3>
-                    <p class="tier-type">Indique e Ganhe</p>
-                    
-                    <div class="commission-box">
-                        <div class="commission-label">Comissão</div>
-                        <div class="commission-value editable" contenteditable="false" data-field="indicador-commission">10%</div>
-                    </div>
-                    
-                    <div class="targets">
-                        <h4>🎯 Metas Bronze</h4>
-                        <div class="target-item">
-                            <span class="target-label">Clínicas</span>
-                            <span class="target-value">50</span>
-                        </div>
-                        <div class="target-item">
-                            <span class="target-label">Profissionais</span>
-                            <span class="target-value">5</span>
-                        </div>
-                        <div class="target-item">
-                            <span class="target-label">Clientes Totais</span>
-                            <span class="target-value">250</span>
-                        </div>
-                    </div>
-                    
-                    <h4 style="margin: 25px 0 15px; color: var(--purple);">O que você faz:</h4>
-                    <ul class="activities-list">
-                        <li>Prospecta e gera demanda</li>
-                        <li>Indica clientes qualificados</li>
-                        <li>Recebe comissão recorrente</li>
-                    </ul>
-                    
-                    <button class="btn btn-outline" onclick="abrirCadastro('indicador')">Começar como Indicador</button>
-                </div>
-                
-                <!-- Prata (Destaque) -->
-                <div class="tier-card prata">
-                    <div class="tier-badge prata">Prata - Mais Popular</div>
-                    <div class="tier-icon">🥈</div>
-                    <h3 class="tier-name">Revendedor</h3>
-                    <p class="tier-type">Venda e Acompanhe</p>
-                    
-                    <div class="commission-box">
-                        <div class="commission-label">Comissão</div>
-                        <div class="commission-value editable" contenteditable="false" data-field="revendedor-bronze">12%</div>
-                        <div style="font-size: 0.9em; margin-top: 10px; color: var(--text-light);">
-                            Prata: <span class="editable" contenteditable="false" data-field="revendedor-prata" style="font-weight: bold; color: var(--purple);">15%</span> | 
-                            Ouro: <span class="editable" contenteditable="false" data-field="revendedor-ouro" style="font-weight: bold; color: var(--purple);">20%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="targets">
-                        <h4>🎯 Metas Prata</h4>
-                        <div class="target-item">
-                            <span class="target-label">Clínicas</span>
-                            <span class="target-value">100</span>
-                        </div>
-                        <div class="target-item">
-                            <span class="target-label">Profissionais</span>
-                            <span class="target-value">5</span>
-                        </div>
-                        <div class="target-item">
-                            <span class="target-label">Clientes Totais</span>
-                            <span class="target-value">500</span>
-                        </div>
-                    </div>
-                    
-                    <h4 style="margin: 25px 0 15px; color: var(--purple);">O que você faz:</h4>
-                    <ul class="activities-list">
-                        <li>Prospecta e gera demanda</li>
-                        <li>Apresenta o IupCare</li>
-                        <li>Fecha contratos</li>
-                        <li>Gera receitas de novos produtos</li>
-                        <li>Expande sua carteira</li>
-                    </ul>
-                    
-                    <button class="btn btn-gradient" onclick="abrirCadastro('revendedor')">Quero Revender</button>
-                </div>
-                
-                <!-- Ouro -->
-                <div class="tier-card ouro-card">
-                    <div class="tier-badge ouro">Ouro - Premium</div>
-                    <div class="tier-icon">🥇</div>
-                    <h3 class="tier-name">VAR</h3>
-                    <p class="tier-type">Value-Added Reseller</p>
-                    
-                    <div class="commission-box">
-                        <div class="commission-label">Comissão</div>
-                        <div class="commission-value editable" contenteditable="false" data-field="var-bronze">22%</div>
-                        <div style="font-size: 0.9em; margin-top: 10px; color: var(--text-light);">
-                            Prata: <span class="editable" contenteditable="false" data-field="var-prata" style="font-weight: bold; color: var(--purple);">25%</span> | 
-                            Ouro: <span class="editable" contenteditable="false" data-field="var-ouro" style="font-weight: bold; color: var(--purple);">30%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="targets">
-                        <h4>🎯 Metas Ouro</h4>
-                        <div class="target-item">
-                            <span class="target-label">Clínicas</span>
-                            <span class="target-value">200</span>
-                        </div>
-                        <div class="target-item">
-                            <span class="target-label">Profissionais</span>
-                            <span class="target-value">5</span>
-                        </div>
-                        <div class="target-item">
-                            <span class="target-label">Clientes Totais</span>
-                            <span class="target-value">1.000</span>
-                        </div>
-                    </div>
-                    
-                    <h4 style="margin: 25px 0 15px; color: var(--purple);">O que você faz:</h4>
-                    <ul class="activities-list">
-                        <li>Máxima capilaridade</li>
-                        <li>Receitas e expansão de carteira</li>
-                        <li>Retenção e CS</li>
-                        <li>Aprimoramento do produto</li>
-                        <li>Educação do mercado</li>
-                        <li>Redução de custos operacionais</li>
-                    </ul>
-                    
-                    <button class="btn btn-outline" onclick="abrirCadastro('var')">Ser um VAR</button>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <button class="btn-edit" onclick="toggleEditMode()">✏️ Editar Comissões</button>
-            </div>
-        </section>
-        
-        <!-- Simulador de Ganhos -->
-        <section class="simulator-section">
+        <section id="simulador" class="simulator-section">
             <h2 class="section-title">💰 Simulador de Ganhos</h2>
-            <p class="section-subtitle">Ajuste os valores à esquerda e veja automaticamente seus ganhos em Bronze, Prata e Ouro</p>
-            
-            <div class="simulator-container">
-                <div class="simulator-table-wrapper">
-                    <table class="simulator-table">
-                        <thead>
-                            <tr>
-                                <th class="input-col">Seus Dados</th>
-                                <th class="bronze-col">🥉 Bronze</th>
-                                <th class="prata-col">🥈 Prata</th>
-                                <th class="ouro-col">🥇 Ouro</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Clínicas/Consultórios -->
-                            <tr>
-                                <td class="label-cell">
-                                    <strong>Qtde Clínicas/Consultórios</strong>
-                                    <input type="number" id="qtde-clinicas" class="input-field" value="50" min="1" max="500">
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value" id="bronze-clinicas">50</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value" id="prata-clinicas">100</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value" id="ouro-clinicas">200</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Profissionais por Clínica -->
-                            <tr>
-                                <td class="label-cell">
-                                    <strong>Profissionais de Saúde por Clínica</strong>
-                                    <input type="number" id="qtde-profissionais" class="input-field" value="5" min="1" max="50">
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value" id="bronze-profissionais">5</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value" id="prata-profissionais">5</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value" id="ouro-profissionais">5</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Clientes Finais Totais -->
-                            <tr class="highlight-row">
-                                <td class="label-cell">
-                                    <strong>Clientes Finais Totais</strong>
-                                    <small>(Clínicas × Profissionais)</small>
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value large" id="bronze-total-clientes">250</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value large" id="prata-total-clientes">500</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value large" id="ouro-total-clientes">1000</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Ticket Médio -->
-                            <tr>
-                                <td class="label-cell">
-                                    <strong>Ticket Médio Cliente Final</strong>
-                                    <select id="ticket-medio" class="input-field">
-                                        <option value="97">R$ 97,00 - Básico</option>
-                                        <option value="197" selected>R$ 197,00 - Premium</option>
-                                        <option value="397">R$ 397,00 - Avançado</option>
-                                    </select>
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value" id="bronze-ticket">R$ 197,00</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value" id="prata-ticket">R$ 197,00</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value" id="ouro-ticket">R$ 197,00</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Faturamento Total -->
-                            <tr class="highlight-row">
-                                <td class="label-cell">
-                                    <strong>Faturamento Total Mensal</strong>
-                                    <small>(Clientes × Ticket)</small>
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value large" id="bronze-faturamento">R$ 49.250,00</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value large" id="prata-faturamento">R$ 98.500,00</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value large" id="ouro-faturamento">R$ 197.000,00</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Divisor de Comissões -->
-                            <tr class="divider-row">
-                                <td colspan="4" class="divider-cell">
-                                    <div class="divider-content">
-                                        <span class="divider-icon">💰</span>
-                                        <span class="divider-text">SUAS COMISSÕES MENSAIS</span>
-                                        <span class="divider-icon">💰</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            <!-- Comissão Indicador -->
-                            <tr>
-                                <td class="label-cell">
-                                    <strong>Indicador</strong>
-                                    <input type="number" id="comissao-indicador" class="input-field small" value="10" min="0" max="100" step="1">
-                                    <span>%</span>
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value money" id="bronze-indicador">R$ 4.925,00</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value money" id="prata-indicador">R$ 0,00</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value money" id="ouro-indicador">R$ 0,00</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Comissão Sales/Revendedor -->
-                            <tr>
-                                <td class="label-cell">
-                                    <strong>Revendedor / Sales</strong>
-                                    <div class="commission-inputs">
-                                        <div>
-                                            <input type="number" id="comissao-sales-bronze" class="input-field tiny" value="12" min="0" max="100" step="1">
-                                            <span>% Bronze</span>
-                                        </div>
-                                        <div>
-                                            <input type="number" id="comissao-sales-prata" class="input-field tiny" value="15" min="0" max="100" step="1">
-                                            <span>% Prata</span>
-                                        </div>
-                                        <div>
-                                            <input type="number" id="comissao-sales-ouro" class="input-field tiny" value="20" min="0" max="100" step="1">
-                                            <span>% Ouro</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="result-cell bronze-bg">
-                                    <span class="result-value money" id="bronze-sales">R$ 5.910,00</span>
-                                </td>
-                                <td class="result-cell prata-bg">
-                                    <span class="result-value money" id="prata-sales">R$ 14.775,00</span>
-                                </td>
-                                <td class="result-cell ouro-bg">
-                                    <span class="result-value money" id="ouro-sales">R$ 39.400,00</span>
-                                </td>
-                            </tr>
-                            
-                            <!-- Comissão VAR -->
-                            <tr class="final-row">
-                                <td class="label-cell">
-                                    <strong>VAR (Value-Added Reseller)</strong>
-                                    <div class="commission-inputs">
-                                        <div>
-                                            <input type="number" id="comissao-var-bronze" class="input-field tiny" value="22" min="0" max="100" step="1">
-                                            <span>% Bronze</span>
-                                        </div>
-                                        <div>
-                                            <input type="number" id="comissao-var-prata" class="input-field tiny" value="25" min="0" max="100" step="1">
-                                            <span>% Prata</span>
-                                        </div>
-                                        <div>
-                                            <input type="number" id="comissao-var-ouro" class="input-field tiny" value="30" min="0" max="100" step="1">
-                                            <span>% Ouro</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="result-cell bronze-bg highlight-result">
-                                    <span class="result-value money large" id="bronze-var">R$ 10.835,00</span>
-                                </td>
-                                <td class="result-cell prata-bg highlight-result">
-                                    <span class="result-value money large" id="prata-var">R$ 24.625,00</span>
-                                </td>
-                                <td class="result-cell ouro-bg highlight-result">
-                                    <span class="result-value money large" id="ouro-var">R$ 59.100,00</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="simulator-cta">
-                    <p class="cta-text">
-                        💡 <strong>Exemplo:</strong> Como VAR Ouro com 200 clínicas, você ganharia 
-                        <strong class="highlight-value" id="example-value">R$ 59.100/mês</strong> = 
-                        <strong class="highlight-value" id="example-year">R$ 709.200/ano</strong>
-                    </p>
-                    <button class="btn btn-gradient btn-large" onclick="abrirCadastro('simulador')">
-                        🚀 Quero Começar Agora!
-                    </button>
-                </div>
+            <p class="section-subtitle">Preencha os valores nas colunas e veja seus ganhos calculados automaticamente</p>
+            <div class="simulator-table-wrapper">
+                <table class="simulator-table">
+                    <thead><tr><th class="input-col">Categoria</th><th>🥉 Bronze</th><th>🥈 Prata</th><th>🥇 Ouro</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td class="label-cell"><strong>Qtde Clínicas/Consultórios</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <input type="number" id="bronze-clinicas" class="input-field" value="50" min="1" max="500">
+                                <div class="warning-text" id="bronze-warning">⚠️ Limite: 250 clientes</div>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <input type="number" id="prata-clinicas" class="input-field" value="100" min="1" max="500">
+                                <div class="warning-text" id="prata-warning">⚠️ Limite: 250-500 clientes</div>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <input type="number" id="ouro-clinicas" class="input-field" value="200" min="1" max="500">
+                                <div class="warning-text" id="ouro-warning">⚠️ Mínimo: 501 clientes</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell"><strong>Profissionais de Saúde por Clínica</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <input type="number" id="bronze-profissionais" class="input-field" value="5" min="1" max="50">
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <input type="number" id="prata-profissionais" class="input-field" value="5" min="1" max="50">
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <input type="number" id="ouro-profissionais" class="input-field" value="5" min="1" max="50">
+                            </td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="label-cell"><strong>Clientes Finais Totais</strong><small>(Clínicas × Profissionais)</small></td>
+                            <td class="result-cell bronze-bg"><span class="result-value large" id="bronze-total-clientes">250</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value large" id="prata-total-clientes">500</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-total-clientes">1000</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell"><strong>Ticket Médio Cliente Final</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <select id="bronze-ticket" class="input-field">
+                                    <option value="97">R$ 97 - Básico</option>
+                                    <option value="197" selected>R$ 197 - Premium</option>
+                                    <option value="397">R$ 397 - Avançado</option>
+                                </select>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <select id="prata-ticket" class="input-field">
+                                    <option value="97">R$ 97 - Básico</option>
+                                    <option value="197" selected>R$ 197 - Premium</option>
+                                    <option value="397">R$ 397 - Avançado</option>
+                                </select>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <select id="ouro-ticket" class="input-field">
+                                    <option value="97">R$ 97 - Básico</option>
+                                    <option value="197" selected>R$ 197 - Premium</option>
+                                    <option value="397">R$ 397 - Avançado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="label-cell"><strong>Faturamento Total Mensal</strong><small>(Clientes × Ticket)</small></td>
+                            <td class="result-cell bronze-bg"><span class="result-value large" id="bronze-faturamento">R$ 49.250,00</span></td>
+                            <td class="result-cell prata-bg"><span class="result-value large" id="prata-faturamento">R$ 98.500,00</span></td>
+                            <td class="result-cell ouro-bg"><span class="result-value large" id="ouro-faturamento">R$ 197.000,00</span></td>
+                        </tr>
+                        <tr class="divider-row"><td colspan="4" class="divider-cell"><div class="divider-content"><span class="divider-icon">💰</span><span class="divider-text">SUAS COMISSÕES MENSAIS</span><span class="divider-icon">💰</span></div></td></tr>
+                        <tr>
+                            <td class="label-cell"><strong>Indicador</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <span class="percentage-badge">10%</span>
+                                <div><span class="result-value money" id="bronze-indicador">R$ 4.925,00</span></div>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <span class="percentage-badge">11%</span>
+                                <div><span class="result-value money" id="prata-indicador">R$ 10.835,00</span></div>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <span class="percentage-badge">12%</span>
+                                <div><span class="result-value money" id="ouro-indicador">R$ 23.640,00</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell"><strong>Representante</strong></td>
+                            <td class="result-cell bronze-bg">
+                                <span class="percentage-badge">12%</span>
+                                <div><span class="result-value money" id="bronze-sales">R$ 5.910,00</span></div>
+                            </td>
+                            <td class="result-cell prata-bg">
+                                <span class="percentage-badge">15%</span>
+                                <div><span class="result-value money" id="prata-sales">R$ 14.775,00</span></div>
+                            </td>
+                            <td class="result-cell ouro-bg">
+                                <span class="percentage-badge">20%</span>
+                                <div><span class="result-value money" id="ouro-sales">R$ 39.400,00</span></div>
+                            </td>
+                        </tr>
+                        <tr class="final-row">
+                            <td class="label-cell"><strong>VAR (Value-Added Reseller)</strong></td>
+                            <td class="result-cell bronze-bg highlight-result">
+                                <span class="percentage-badge">22%</span>
+                                <div><span class="result-value money large" id="bronze-var">R$ 10.835,00</span></div>
+                            </td>
+                            <td class="result-cell prata-bg highlight-result">
+                                <span class="percentage-badge">25%</span>
+                                <div><span class="result-value money large" id="prata-var">R$ 24.625,00</span></div>
+                            </td>
+                            <td class="result-cell ouro-bg highlight-result">
+                                <span class="percentage-badge">30%</span>
+                                <div><span class="result-value money large" id="ouro-var">R$ 59.100,00</span></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="simulator-cta">
+                <p class="cta-text">💡 <strong>Exemplo:</strong> Como VAR Ouro com <span id="example-clients">1000</span> clientes, você ganharia <strong class="highlight-value" id="example-value">R$ 59.100/mês</strong> = <strong class="highlight-value" id="example-year">R$ 709.200/ano</strong></p>
+                <button class="btn btn-gradient btn-large" onclick="alert('🎉 Em produção, isso abriria o formulário de cadastro!')">🚀 Quero Começar Agora!</button>
             </div>
         </section>
-        
-        <!-- Tabela Comparativa -->
-        <section class="comparison-section">
-            <h2 class="section-title">Compare os Modelos</h2>
-            <p class="section-subtitle">Entenda as diferenças e escolha o modelo ideal para você</p>
-            
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th style="text-align: left;">Atividade</th>
-                        <th>Indicador</th>
-                        <th>Revendedor</th>
-                        <th>VAR</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="text-align: left;"><strong>Prospecta e Gera Demanda</strong></td>
-                        <td><span class="yes">✓</span></td>
-                        <td><span class="yes">✓</span></td>
-                        <td><span class="yes">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Apresenta o Produto</strong></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="yes">✓</span></td>
-                        <td><span class="yes">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Fecha Contratos</strong></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="yes">✓</span></td>
-                        <td><span class="yes">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Implementação</strong></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="yes">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Gera Valor no Primeiro Passo</strong></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="yes">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Suporte e CS</strong></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="no">✗</span></td>
-                        <td><span class="yes">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Comissão Bronze</strong></td>
-                        <td><strong>10%</strong></td>
-                        <td><strong>12%</strong></td>
-                        <td><strong>22%</strong></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><strong>Comissão Ouro</strong></td>
-                        <td><strong>10%</strong></td>
-                        <td><strong>20%</strong></td>
-                        <td><strong>30%</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        
-        <!-- Preços IupCare -->
-        <section class="prices-section">
-            <h2 class="section-title">Planos IupCare</h2>
-            <p class="section-subtitle">Produtos que você vai vender com comissão recorrente</p>
-            
-            <div class="price-cards">
-                <div class="price-card">
-                    <div class="price-name">Básico</div>
-                    <div class="price-value">R$ 97</div>
-                    <div class="price-period">/mês</div>
-                    <p style="margin-top: 20px; color: var(--text-light);">Para profissionais solo</p>
-                </div>
-                
-                <div class="price-card featured">
-                    <div class="price-name">Premium</div>
-                    <div class="price-value">R$ 197</div>
-                    <div class="price-period">/mês</div>
-                    <p style="margin-top: 20px; opacity: 0.9;">Consultórios pequenos<br><strong>⭐ Mais Vendido</strong></p>
-                </div>
-                
-                <div class="price-card">
-                    <div class="price-name">Avançado</div>
-                    <div class="price-value">R$ 397</div>
-                    <div class="price-period">/mês</div>
-                    <p style="margin-top: 20px; color: var(--text-light);">Clínicas completas</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 40px; padding: 30px; background: var(--light-pink); border-radius: 20px; text-align: center;">
-                <p style="color: var(--text-dark); line-height: 1.8;">
-                    <strong>💡 Exemplo de Ganhos (VAR Ouro):</strong><br>
-                    100 clientes no plano Premium (R$ 197/mês) = <strong>R$ 19.700/mês de MRR</strong><br>
-                    Sua comissão de 30% = <strong>R$ 5.910/mês recorrente</strong> 🎉
-                </p>
-            </div>
-        </section>
-        
-        <!-- Benefícios -->
-        <section class="benefits-section">
-            <h2 class="section-title">Por Que Ser Parceiro IupCare?</h2>
-            <p class="section-subtitle">Mais do que comissões, uma parceria de verdade</p>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">💰</div>
-                    <h3 class="benefit-title">Renda Recorrente</h3>
-                    <p class="benefit-text">Ganhe todos os meses enquanto seus clientes usam o IupCare. Construa um negócio sustentável.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">📈</div>
-                    <h3 class="benefit-title">Mercado Aquecido</h3>
-                    <p class="benefit-text">Saúde é uma das áreas que mais crescem. 2.500+ clínicas buscando digitalização.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎯</div>
-                    <h3 class="benefit-title">Produto Validado</h3>
-                    <p class="benefit-text">Software maduro, clientes satisfeitos, churn baixo. Você vende algo que funciona.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🚀</div>
-                    <h3 class="benefit-title">Fácil de Vender</h3>
-                    <p class="benefit-text">Dor clara (gestão caótica), solução comprovada, ROI rápido para o cliente.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🤝</div>
-                    <h3 class="benefit-title">Suporte Total</h3>
-                    <p class="benefit-text">Treinamento, materiais, suporte técnico aos clientes. Você nunca fica sozinho.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">⭐</div>
-                    <h3 class="benefit-title">Marca Forte</h3>
-                    <p class="benefit-text">IupCare é reconhecido no mercado de saúde. Use nossa credibilidade para vender mais.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- CTA Final -->
-        <section class="cta-section">
-            <h2>Pronto para Transformar Vidas?</h2>
-            <p>Junte-se a nós e ajude profissionais de saúde a focar no que realmente importa: cuidar de pessoas.</p>
-            <a href="#niveis" class="cta-primary">Escolher Meu Nível</a>
-            <div style="margin-top: 40px;">
-                <p style="font-size: 1.1em;">📧 parcerias@iupcare.com.br | 📱 (34) 99999-9999</p>
-            </div>
-        </section>
-        
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <p style="font-size: 1.1em; color: var(--text-dark); margin-bottom: 20px;">
-                    <strong>IupTec Tecnologia e Desenvolvimento de Sistemas Ltda</strong>
-                </p>
-                <p style="color: var(--text-light);">
-                    Av. Bélgica, 1220, sala 11 - Uberlândia/MG - CEP: 38.405-030<br>
-                    CNPJ: 34.001.576/0001-95
-                </p>
-                
-                <div class="footer-links">
-                    <a href="https://iupcare.com.br" target="_blank">Website</a>
-                    <a href="mailto:parcerias@iupcare.com.br">Email</a>
-                    <a href="https://wa.me/5534999999999" target="_blank">WhatsApp</a>
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Privacidade</a>
-                </div>
-                
-                <p style="margin-top: 30px; color: var(--text-light); font-size: 0.9em;">
-                    &copy; 2025 IupCare - Todos os direitos reservados
-                </p>
-            </div>
-        </footer>
     </div>
-    
+    <footer>
+        <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>IupTec Tecnologia e Desenvolvimento de Sistemas Ltda</strong></p>
+        <p style="color: var(--text-light);">Av. Bélgica, 1220, sala 11 - Uberlândia/MG - CEP: 38.405-030<br>CNPJ: 34.001.576/0001-95</p>
+        <p style="margin-top: 20px;">📧 parcerias@iupcare.com.br | 📱 (34) 99999-9999</p>
+        <p style="margin-top: 30px; color: var(--text-light); font-size: 0.9em;">© 2025 IupCare</p>
+    </footer>
     <script>
-        let editMode = false;
-        
-        // Metas por nível (Bronze, Prata, Ouro)
-        const nivelMetas = {
-            bronze: { clinicas: 50 },
-            prata: { clinicas: 100 },
-            ouro: { clinicas: 200 }
-        };
-        
-        function calcularSimulador() {
-            // Obter valores dos inputs
-            const qtdeClinicas = parseInt(document.getElementById('qtde-clinicas').value) || 50;
-            const qtdeProfissionais = parseInt(document.getElementById('qtde-profissionais').value) || 5;
-            const ticketMedio = parseFloat(document.getElementById('ticket-medio').value) || 197;
-            
-            // Comissões
-            const comissaoIndicador = parseFloat(document.getElementById('comissao-indicador').value) || 10;
-            const comissaoSalesBronze = parseFloat(document.getElementById('comissao-sales-bronze').value) || 12;
-            const comissaoSalesPrata = parseFloat(document.getElementById('comissao-sales-prata').value) || 15;
-            const comissaoSalesOuro = parseFloat(document.getElementById('comissao-sales-ouro').value) || 20;
-            const comissaoVarBronze = parseFloat(document.getElementById('comissao-var-bronze').value) || 22;
-            const comissaoVarPrata = parseFloat(document.getElementById('comissao-var-prata').value) || 25;
-            const comissaoVarOuro = parseFloat(document.getElementById('comissao-var-ouro').value) || 30;
-            
-            // Calcular para cada nível
-            calcularNivel('bronze', nivelMetas.bronze.clinicas, qtdeProfissionais, ticketMedio, 
-                          comissaoIndicador, comissaoSalesBronze, comissaoVarBronze);
-            calcularNivel('prata', nivelMetas.prata.clinicas, qtdeProfissionais, ticketMedio, 
-                          0, comissaoSalesPrata, comissaoVarPrata); // Indicador só tem comissão no Bronze
-            calcularNivel('ouro', nivelMetas.ouro.clinicas, qtdeProfissionais, ticketMedio, 
-                          0, comissaoSalesOuro, comissaoVarOuro); // Indicador só tem comissão no Bronze
-            
-            // Atualizar exemplo
-            atualizarExemplo();
-        }
-        
-        function calcularNivel(nivel, clinicas, profissionais, ticket, comIndicador, comSales, comVar) {
-            // Calcular clientes totais
-            const clientesTotais = clinicas * profissionais;
-            
-            // Calcular faturamento
-            const faturamento = clientesTotais * ticket;
-            
-            // Calcular comissões
-            const comissaoIndicador = faturamento * (comIndicador / 100);
-            const comissaoSales = faturamento * (comSales / 100);
-            const comissaoVar = faturamento * (comVar / 100);
-            
-            // Atualizar UI
-            document.getElementById(`${nivel}-clinicas`).textContent = clinicas;
-            document.getElementById(`${nivel}-profissionais`).textContent = profissionais;
-            document.getElementById(`${nivel}-total-clientes`).textContent = clientesTotais;
-            document.getElementById(`${nivel}-ticket`).textContent = formatMoney(ticket);
-            document.getElementById(`${nivel}-faturamento`).textContent = formatMoney(faturamento);
-            document.getElementById(`${nivel}-indicador`).textContent = formatMoney(comissaoIndicador);
-            document.getElementById(`${nivel}-sales`).textContent = formatMoney(comissaoSales);
-            document.getElementById(`${nivel}-var`).textContent = formatMoney(comissaoVar);
-        }
-        
-        function atualizarExemplo() {
-            // Pegar valor do VAR Ouro
-            const valorVarOuro = document.getElementById('ouro-var').textContent;
-            const valorNumerico = parseFloat(valorVarOuro.replace('R$', '').replace(/\./g, '').replace(',', '.')) || 0;
-            const valorAnual = valorNumerico * 12;
-            
-            document.getElementById('example-value').textContent = formatMoney(valorNumerico);
-            document.getElementById('example-year').textContent = formatMoney(valorAnual);
-        }
-        
-        function formatMoney(value) {
-            return 'R$ ' + value.toLocaleString('pt-BR', { 
-                minimumFractionDigits: 2, 
-                maximumFractionDigits: 2 
-            });
-        }
-        
-        // Event listeners
-        document.getElementById('qtde-clinicas').addEventListener('input', calcularSimulador);
-        document.getElementById('qtde-profissionais').addEventListener('input', calcularSimulador);
-        document.getElementById('ticket-medio').addEventListener('change', calcularSimulador);
-        
-        // Event listeners para comissões
-        document.getElementById('comissao-indicador').addEventListener('input', calcularSimulador);
-        document.getElementById('comissao-sales-bronze').addEventListener('input', calcularSimulador);
-        document.getElementById('comissao-sales-prata').addEventListener('input', calcularSimulador);
-        document.getElementById('comissao-sales-ouro').addEventListener('input', calcularSimulador);
-        document.getElementById('comissao-var-bronze').addEventListener('input', calcularSimulador);
-        document.getElementById('comissao-var-prata').addEventListener('input', calcularSimulador);
-        document.getElementById('comissao-var-ouro').addEventListener('input', calcularSimulador);
-        
-        // Calcular valores iniciais
-        calcularSimulador();
-        
-        function toggleEditMode() {
-            editMode = !editMode;
-            const editables = document.querySelectorAll('.editable');
-            const banner = document.getElementById('editBanner');
-            
-            editables.forEach(el => {
-                el.contentEditable = editMode;
-                if (editMode) {
-                    el.style.backgroundColor = '#FFF3CD';
-                    el.style.cursor = 'text';
-                } else {
-                    el.style.backgroundColor = '';
-                    el.style.cursor = 'pointer';
-                }
-            });
-            
-            if (editMode) {
-                banner.classList.add('active');
-                alert('✏️ Modo de edição ativado!\n\nClique nos valores de comissão para editá-los.');
-            } else {
-                banner.classList.remove('active');
-            }
-        }
-        
-        function saveChanges() {
-            const data = {};
-            document.querySelectorAll('.editable').forEach(el => {
-                const field = el.getAttribute('data-field');
-                if (field) {
-                    data[field] = el.textContent;
-                }
-            });
-            
-            console.log('Dados salvos:', data);
-            alert('✅ Alterações salvas com sucesso!\n\nEm produção, isso salvaria no banco de dados.');
-        }
-        
-        function abrirCadastro(tipo) {
-            const qtdeClinicas = document.getElementById('qtde-clinicas').value;
-            const ticketMedio = document.getElementById('ticket-medio').value;
-            
-            alert(`🎉 Ótima escolha!\n\nVocê está se cadastrando!\nProjeção: ${qtdeClinicas} clínicas\nTicket: R$ ${ticketMedio}\n\nEm produção, isso abriria o formulário de cadastro com seus dados pré-preenchidos.`);
-        }
-        
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        const comissoes={bronze:{indicador:10,representante:12,var:22},prata:{indicador:11,representante:15,var:25},ouro:{indicador:12,representante:20,var:30}};const limites={bronze:{min:1,max:250},prata:{min:250,max:500},ouro:{min:501,max:999999}};function formatMoney(a){return'R$ '+a.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}function validarLimites(a,b){const c=document.getElementById(a+'-clinicas'),d=document.getElementById(a+'-profissionais'),e=document.getElementById(a+'-warning');let f=!0;if(b<limites[a].min){e.textContent='⚠️ Mínimo: '+limites[a].min+' clientes';e.classList.add('show');c.classList.add('error');d.classList.add('error');f=!1}else if(b>limites[a].max&&'ouro'!==a){e.textContent='⚠️ Máximo: '+limites[a].max+' clientes';e.classList.add('show');c.classList.add('error');d.classList.add('error');f=!1}else{e.classList.remove('show');c.classList.remove('error');d.classList.remove('error')}return f}function calcularNivel(a){const b=parseInt(document.getElementById(a+'-clinicas').value)||0,c=parseInt(document.getElementById(a+'-profissionais').value)||0,d=parseFloat(document.getElementById(a+'-ticket').value)||0,e=b*c,f=e*d;validarLimites(a,e);const g=f*(comissoes[a].indicador/100),h=f*(comissoes[a].representante/100),i=f*(comissoes[a].var/100);document.getElementById(a+'-total-clientes').textContent=e;document.getElementById(a+'-faturamento').textContent=formatMoney(f);document.getElementById(a+'-indicador').textContent=formatMoney(g);document.getElementById(a+'-sales').textContent=formatMoney(h);document.getElementById(a+'-var').textContent=formatMoney(i)}function calcularTodos(){calcularNivel('bronze');calcularNivel('prata');calcularNivel('ouro');atualizarExemplo()}function atualizarExemplo(){const a=document.getElementById('ouro-total-clientes').textContent,b=document.getElementById('ouro-var').textContent,c=parseFloat(b.replace('R$','').replace(/\./g,'').replace(',','.'))||0,d=c*12;document.getElementById('example-clients').textContent=a;document.getElementById('example-value').textContent=formatMoney(c);document.getElementById('example-year').textContent=formatMoney(d)}const inputs=['bronze-clinicas','bronze-profissionais','bronze-ticket','prata-clinicas','prata-profissionais','prata-ticket','ouro-clinicas','ouro-profissionais','ouro-ticket'];inputs.forEach(a=>{const b=document.getElementById(a);b&&(b.addEventListener('input',calcularTodos),b.addEventListener('change',calcularTodos))});calcularTodos();document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(a){a.preventDefault();const b=document.querySelector(this.getAttribute('href'));b&&b.scrollIntoView({behavior:'smooth',block:'start'})})});
     </script>
 </body>
 </html>
